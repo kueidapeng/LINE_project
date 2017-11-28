@@ -1,10 +1,11 @@
 <?php 
 
-require_once __DIR__ . '/vendor/autoload.php';
- 
+include('../config/config.php');
+require_once '../vendor/autoload.php';
+
  $bot = new \LINE\LINEBot(
-  new \LINE\LINEBot\HTTPClient\CurlHTTPClient(''),
-  ['channelSecret' => '']
+  new \LINE\LINEBot\HTTPClient\CurlHTTPClient($config['bot_setting']['curlHTTPClient']),
+  ['channelSecret' => $config['bot_setting']['channelSecret']]
 );
  
 $signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
@@ -12,11 +13,11 @@ $signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE]
 $body = file_get_contents("php://input");
     $events = $bot->parseEventRequest($body, $signature);
     foreach ($events as $event) {
-		
-        if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) { //return為文字訊息
+        if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) {
             
 			$reply_token = $event->getReplyToken();
 			$getText = $event->getText();
+			
 			
 			//單筆傳送
 			/*
@@ -26,6 +27,7 @@ $body = file_get_contents("php://input");
 			$response = $bot->replyMessage($reply_token, $stickerMessageBuilder);
 			$response =  $bot->replyMessage($reply_token, $textMessageBuilder);
 			*/
+			
 			
 			$MultiMessageBuilder = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 			 
