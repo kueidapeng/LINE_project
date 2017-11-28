@@ -1,11 +1,10 @@
 <?php 
 
-include('../config/config.php');
 require_once '../vendor/autoload.php';
 
-$bot = new \LINE\LINEBot(
-  new \LINE\LINEBot\HTTPClient\CurlHTTPClient($config['bot_setting']['curlHTTPClient']),
-  ['channelSecret' => $config['bot_setting']['channelSecret']]
+ $bot = new \LINE\LINEBot(
+  new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('curlHTTPClient')),
+  ['channelSecret' => getenv('channelSecret')]
 );
  
 $signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
