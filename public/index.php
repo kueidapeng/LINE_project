@@ -39,24 +39,4 @@ $body = file_get_contents("php://input");
     }
  
 
-/*$client = new LINEBotTiny($channelAccessToken, $channelSecret);
- 
- 
- include_once "LINEBotTiny.php";
- 
- 
-//$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello'); 
- 
-foreach ($client->parseEvents() as $event) {
-    $client->replyMessage(array(
-        'replyToken' => $event['replyToken'],
-        'messages' => array(
-            array(
-                'type' => 'text',
-                'text' => "sssss"
-            )
-        )
-    ));
-};*/
-
  ?>
