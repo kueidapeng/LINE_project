@@ -4,21 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0c3e3ff18274a154f0aa1fcc93117ee4",
-    "content-hash": "1cbb509bc58e72bda4a4f17bb1260cfb",
+    "content-hash": "13d943025b09ed399b8b270d020fcda1",
     "packages": [
         {
             "name": "linecorp/line-bot-sdk",
-            "version": "2.3.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/line/line-bot-sdk-php.git",
-                "reference": "38528aaa3a1abc2809974ab65cdcb7579f9eb927"
+                "reference": "3477716f642509495cd889a1f36d03098b1a4b32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/line/line-bot-sdk-php/zipball/38528aaa3a1abc2809974ab65cdcb7579f9eb927",
-                "reference": "38528aaa3a1abc2809974ab65cdcb7579f9eb927",
+                "url": "https://api.github.com/repos/line/line-bot-sdk-php/zipball/3477716f642509495cd889a1f36d03098b1a4b32",
+                "reference": "3477716f642509495cd889a1f36d03098b1a4b32",
                 "shasum": ""
             },
             "require": {
@@ -58,15 +57,19 @@
                 "line",
                 "sdk"
             ],
-            "time": "2017-09-20 10:22:04"
+            "time": "2017-10-06 08:31:44"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "linecorp/line-bot-sdk": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=5.6"
+    },
     "platform-dev": []
 }
