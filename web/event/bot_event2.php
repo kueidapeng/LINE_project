@@ -1,15 +1,19 @@
 ﻿ 
 <?php
 
-		 
+			$columns = array();
+			$img_url = "https://github.com/chliwei199/images/raw/master/str1.png";
+			for($i=0;$i<5;$i++) //最多5筆
+			{
 			$actions = array(
-			
-			  new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("按鈕1","文字1"),
-			  new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("Google","http://www.google.com"),
-			  
-			  new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("下一頁", "page=3"),
-			  new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("上一頁", "page=1")
-			);
+			//一般訊息型 action
+			new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder("按鈕1","文字1"),
+			//網址型 action
+			new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("觀看食記","http://www.google.com")
+			  );
+			  $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder("標題".$i, "說明".$i, $img_url , $actions);
+			  $columns[] = $column;
+			}
 			 
 			$img_url = "圖片網址，必需為 https (圖片非必填欄位)";
 			$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("按鈕文字","說明", $img_url, $actions);
