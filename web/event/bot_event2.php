@@ -1,17 +1,14 @@
 ﻿ 
 <?php
 
- function TraitFunc_speak(Pet $that) { 
+		 
+			$stickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(1,15); //貼圖
+			
+			$response = $bot->replyMessage($reply_token, $stickerMessageBuilder);
  
- function sxxx{
-	 
-	 
- }
  
- }
 
 
- 
 
 
 ?>

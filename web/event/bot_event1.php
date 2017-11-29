@@ -1,16 +1,10 @@
 ﻿ 
 <?php
-
- function EventFunc_talk(bot_event $that) {
-	 
-	 
-	  function sxxx(){
-	 
-	 
- }
-	 
- }
-
+ 
+			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($getText); //文字
+ 
+			$response =  $bot->replyMessage($reply_token, $textMessageBuilder);
+ 
 
 ?>
  
