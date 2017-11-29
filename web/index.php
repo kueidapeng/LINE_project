@@ -62,7 +62,8 @@ $body = file_get_contents("php://input");
 			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($getText);  
 			$bot->replyMessage($reply_token, $textMessageBuilder);
 		}
-		
+		//template	
+		if ($event instanceof \LINE\LINEBot\MessageBuilder\TemplateBuilder) {
 		$columns = array();
 		$img_url = "圖片網址，必需為 https (圖片非必填欄位)";
 		for($i=0;$i<5;$i++) //最多5筆
@@ -79,7 +80,7 @@ $body = file_get_contents("php://input");
 		$carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
 		$msg = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要用手機的賴才看的到哦", $carousel);
 		$bot->replyMessage($replyToken,$msg);
-		
+	}	
     }
  
 
