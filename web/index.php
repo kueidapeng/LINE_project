@@ -31,6 +31,7 @@ $body = file_get_contents("php://input");
 			$array = [
 				"安安" => "bot_event1.php",
 				"掰掰" => "bot_event2.php",
+				"顆顆" => "bot_event3.php",				
 			];			
 
 			if(isset($array[$getText])){
