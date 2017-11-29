@@ -1,6 +1,6 @@
 <?php
         $columns = array();
-		$img_url = "https://github.com/chliwei199/images/raw/master/str1.png";
+		$img_url = "https://github.com/chliwei199/images/raw/master/2.jpg";
 		for($i=0;$i<5;$i++) //最多5筆
 		{
 		  $actions = array(
