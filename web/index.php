@@ -32,7 +32,8 @@ $body = file_get_contents("php://input");
 				"安安" => "bot_event1.php",
 				"掰掰" => "bot_event2.php",
 				"顆顆" => "bot_event3.php",
-				"轉" => "bot_carousel.php",				
+				"carousel" => "bot_carousel.php",
+				"confirm" => "bot_confirm.php",				
 			];			
 
 			if(isset($array[$getText])){
