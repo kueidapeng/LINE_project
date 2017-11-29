@@ -13,5 +13,5 @@
 		  $columns[] = $column;
 		}
 		$carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
-		$msg = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要用手機的賴才看的到哦", $carousel);
+		$msg = new \LINE\LINEBot\MessageBuilder\TemplateBuilder("這訊息要用手機的賴才看的到哦", $carousel);
 		$bot->replyMessage($replyToken,$msg);
