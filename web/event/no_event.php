@@ -1,7 +1,7 @@
 ﻿ 
 <?php
- 
- 			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('&#10007B;&#10007B;'); //文字
+			$textMessage = '\uDBC0\uDC84';
+ 			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($textMessage);  
 			$response =  $bot->replyMessage($reply_token, $textMessageBuilder);
 
 ?>
