@@ -1,18 +1,8 @@
 ﻿ 
 <?php
-
- function TraitFunc_speak(Pet $that) { 
  
- function sxxx{
-	 
-	 
- }
- 
- }
-
-
- 
-
+ 			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('&#10007B;&#10007B;'); //文字
+			$response =  $bot->replyMessage($reply_token, $textMessageBuilder);
 
 ?>
  
