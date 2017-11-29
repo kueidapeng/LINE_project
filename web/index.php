@@ -65,7 +65,7 @@ $body = file_get_contents("php://input");
 		//template	
 		if ($event instanceof \LINE\LINEBot\MessageBuilder\TemplateBuilder) {
 		$columns = array();
-		$img_url = "圖片網址，必需為 https (圖片非必填欄位)";
+		$img_url = "https://github.com/chliwei199/images/raw/master/str1.png";
 		for($i=0;$i<5;$i++) //最多5筆
 		{
 		  $actions = array(
