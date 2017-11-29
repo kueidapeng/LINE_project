@@ -27,9 +27,7 @@ $body = file_get_contents("php://input");
 		//text event 
         if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) {
 			$getText = $event->getText();
-
-			$getText = $event->getText();
-			
+ 
 			$array = [
 				"安安" => "bot_event1.php",
 				"掰掰" => "bot_event2.php",
