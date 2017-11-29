@@ -28,6 +28,19 @@ $body = file_get_contents("php://input");
         if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) {
 			$getText = $event->getText();
 
+			$getText = $event->getText();
+			
+			$array = [
+				"安安" => "bot_event1.php",
+				"掰掰" => "bot_event2.php",
+			];			
+
+			if(isset($array[$getText])){
+			include('event/'.$array[$getText]);
+			}else{ 
+			include('event/no_event.php');
+			} 
+			
 			//單筆傳送
 			/*
 			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($getText); //文字
@@ -35,13 +48,13 @@ $body = file_get_contents("php://input");
 			
 			$response = $bot->replyMessage($reply_token, $stickerMessageBuilder);
 			$response =  $bot->replyMessage($reply_token, $textMessageBuilder);
-			*/
+			
 
 			$MultiMessageBuilder = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 			$MultiMessageBuilder->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($getText)); 
 			$MultiMessageBuilder->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(1,17)); 
 			
-			$bot->replyMessage($reply_token, $MultiMessageBuilder);
+			$bot->replyMessage($reply_token, $MultiMessageBuilder);*/
         }
 
 		//location event 		
