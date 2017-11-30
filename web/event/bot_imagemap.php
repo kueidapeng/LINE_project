@@ -17,7 +17,7 @@
 			//$linkUri1="https://www.google.com.tw/";
 			//$linkUri2="https://www.youtube.com/";
 			
-			$columns[] = new \LINE\LINEBot\ImagemapActionBuilder\ImagemapMessageActionBuilder($text1,$areaBuilderLT);
+			$columns[] = new \LINE\LINEBot\ImagemapActionBuilder\ImagemapUriActionBuilder($text1,$areaBuilderLT);
 			//$columns[] = new \LINE\LINEBot\ImagemapActionBuilder\ImagemapUriActionBuilder($linkUri1,$areaBuilderRT);
 			//$columns[] = new \LINE\LINEBot\ImagemapActionBuilder\ImagemapMessageActionBuilder($text2,$areaBuilderLD);
 			//$columns[] = new \LINE\LINEBot\ImagemapActionBuilder\ImagemapUriActionBuilder($linkUri2,$areaBuilderRD);
