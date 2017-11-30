@@ -14,7 +14,7 @@
 			
 			//$text1="block1";
 			//$text2="block2";			
-			//$linkUri1="https://www.google.com.tw/";
+			$linkUri1="https://www.google.com.tw/";
 			//$linkUri2="https://www.youtube.com/";
 			
 			//$columns[] = new \LINE\LINEBot\ImagemapActionBuilder\ImagemapMessageActionBuilder($text1,$areaBuilderLT);
