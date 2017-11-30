@@ -1,7 +1,7 @@
 ﻿ 
 <?php
 
-			$columns = array();
+		 
 			$baseUrl="https://4.share.photo.xuite.net/min0427/140d536/6411593/262027757_x.jpg";
 			$altText="方塊圖片";
 			
@@ -15,7 +15,7 @@
 			new \LINE\LINEBot\ImagemapActionBuilder\AreaBuilder($areaBuilder)
 			);
  
-			$ImageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImagemapMessageBuilder($originalContentUrl,$previewImageUrl,$baseSizeBuilder,$actions);  
+			$ImageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImagemapMessageBuilder($baseUrl,$altText,$baseSizeBuilder,$actions);  
  
 			$response =  $bot->replyMessage($reply_token, $ImageMessageBuilder);
  
