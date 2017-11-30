@@ -6,13 +6,13 @@
 			$altText="方塊圖片";
 			
 			$baseSizeBuilder = new \LINE\LINEBot\MessageBuilder\Imagemap\BaseSizeBuilder(1040,1040);
-			$areaBuilder = new \LINE\LINEBot\ImagemapActionBuilder\ImagemapMessageActionBuilder(0,0,520,1040);
+			$areaBuilder = new \LINE\LINEBot\ImagemapActionBuilder\AreaBuilder(0,0,520,1040);
 			
 			$linkUri='https://www.google.com.tw/';
 			
 			$actions = array(
 			$linkUri,
-			new \LINE\LINEBot\ImagemapActionBuilder\AreaBuilder($areaBuilder)
+			$areaBuilder
 			);
  
 			$ImageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImagemapMessageBuilder($baseUrl,$altText,$baseSizeBuilder,$actions);  
