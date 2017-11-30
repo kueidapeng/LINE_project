@@ -2,7 +2,7 @@
 <?php
 
 		    $columns = array();
-			$baseUrl="https://raw.githubusercontent.com/chliwei199/images/master/cube.png";
+			$baseUrl="https://github.com/chliwei199/images/raw/master/2.jpg";
 			$altText="方塊圖片";
 			
 			$baseSizeBuilder = new \LINE\LINEBot\MessageBuilder\Imagemap\BaseSizeBuilder(500,500);
