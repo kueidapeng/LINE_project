@@ -34,6 +34,7 @@ $body = file_get_contents("php://input");
 				"顆顆" => "bot_event3.php",
 				"carousel" => "bot_carousel.php",
 				"confirm" => "bot_confirm.php",				
+				"imagemap" => "bot_imagemap.php",	
 			];			
 
 			if(isset($array[$getText])){
