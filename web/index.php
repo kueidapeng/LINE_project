@@ -29,16 +29,16 @@ $body = file_get_contents("php://input");
 			$getText = $event->getText();
  
 			$array = [
-				"安安" => "bot_event1.php",
-				"掰掰" => "bot_event2.php",
-				"顆顆" => "bot_event3.php",
-				"carousel" => "bot_carousel.php",
-				"confirm" => "bot_confirm.php",				
-				"imagemap" => "bot_imagemap.php",	
+				"安安" => "bot_event1",
+				"掰掰" => "bot_event2",
+				"顆顆" => "bot_event3",
+				"carousel" => "bot_carousel",
+				"confirm" => "bot_confirm",				
+				"imagemap" => "bot_imagemap",	
 			];			
 
 			if(isset($array[$getText])){
-			include('event/'.$array[$getText]);
+			include('event/'.$array[$getText].'.php');
 			}else{ 
 			include('event/no_event.php');
 			} 
@@ -66,6 +66,23 @@ $body = file_get_contents("php://input");
 			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($getText);  
 			$bot->replyMessage($reply_token, $textMessageBuilder);
 		}
+		
+		if ($event instanceof \LINE\LINEBot\Event\PostbackEvent) {
+			
+			$getText = $event->getPostbackData();
+			
+			if ($getText) {
+				parse_str($getText, $data);
+				if (isset($data["ans"])) {
+					
+					$page = $data["ans"];
+					$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($page);  
+					$bot->replyMessage($reply_token, $textMessageBuilder);					
+
+				}
+			}
+
+		}		
 	
     }
  

@@ -1,5 +1,4 @@
-﻿ 
-<?php
+﻿ <?php
 
 		    $columns = array();
 			$baseUrl="https://raw.githubusercontent.com/chliwei199/images/master/cube.png?_ignore=";
