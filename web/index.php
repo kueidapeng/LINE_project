@@ -21,6 +21,14 @@ $body = file_get_contents("php://input");
 	
 		$reply_token = $event->getReplyToken();
 		
+		//follow event 
+        if ($event instanceof \LINE\LINEBot\Event\FollowEvent) { 
+
+			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("Hello everybody");  
+			$bot->replyMessage($reply_token, $textMessageBuilder);
+ 
+        }
+		
 		//join group event
         if ($event instanceof \LINE\LINEBot\Event\JoinEvent) { 
 
