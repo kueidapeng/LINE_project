@@ -13,9 +13,11 @@ if (file_exists(__DIR__.'/.env')){
 );
  
 $signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
- 
 $body = file_get_contents("php://input");
+
     $events = $bot->parseEventRequest($body, $signature);
+	$profile = $bot->getProfile('user-id');
+
 	
     foreach ($events as $event){
 	
@@ -24,8 +26,10 @@ $body = file_get_contents("php://input");
 		//follow event 
         if ($event instanceof \LINE\LINEBot\Event\FollowEvent) { 
 
-			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("Hello everybody");  
+ 
+			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('user-id='.$event->getUserId());  
 			$bot->replyMessage($reply_token, $textMessageBuilder);
+ 
  
         }
 		
