@@ -16,7 +16,6 @@ $signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE]
 $body = file_get_contents("php://input");
 
     $events = $bot->parseEventRequest($body, $signature);
-	$profile = $bot->getProfile('user-id');
 
 	
     foreach ($events as $event){
