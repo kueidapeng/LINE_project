@@ -26,8 +26,16 @@ $body = file_get_contents("php://input");
 		//follow event 
         if ($event instanceof \LINE\LINEBot\Event\FollowEvent) { 
 
- 
-			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('user-id='.$event->getUserId());  
+			$user_ID=$event->getUserId();
+			
+			//call get profile
+			$response = $bot->getProfile($user_ID);
+			$profile = $response->getJSONDecodedBody();
+			$displayName = $profile['displayName'];
+			//$statusMessage = $profile['statusMessage'];
+			//$pictureUrl = $profile['pictureUrl'];
+			
+			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($displayName."你好呀!!!");  
 			$bot->replyMessage($reply_token, $textMessageBuilder);
  
  
