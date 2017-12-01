@@ -2,6 +2,9 @@
 
 require_once '../vendor/autoload.php';
 
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+
  $bot = new \LINE\LINEBot(
   new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('curlHTTPClient')),
   ['channelSecret' => getenv('channelSecret')]
