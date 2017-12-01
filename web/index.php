@@ -8,7 +8,7 @@ if (file_exists(__DIR__.'/.env')){
 }
 
  $bot = new \LINE\LINEBot(
-  new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getgenv('curlHTTPClient')),
+  new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('curlHTTPClient')),
   ['channelSecret' => getenv('channelSecret')]
 );
  
