@@ -17,7 +17,7 @@ $body = file_get_contents("php://input");
 
     $events = $bot->parseEventRequest($body, $signature);
 
-	
+	error_log("test print log ");
     foreach ($events as $event){
 	
 		$reply_token = $event->getReplyToken();
