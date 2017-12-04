@@ -59,6 +59,7 @@ error_log("events: ".$events);
 				"掰掰" => "bot_event2",
 				"顆顆" => "bot_event3",
 				"carousel" => "bot_carousel",
+				"news" => "bot_news",	
 				"confirm" => "bot_confirm",				
 				"imagemap" => "bot_imagemap",	
 			];			
