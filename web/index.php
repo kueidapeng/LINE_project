@@ -15,9 +15,11 @@ if (file_exists(__DIR__.'/.env')){
 $signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 $body = file_get_contents("php://input");
 
+error_log("Signature: ".$signature);
+
     $events = $bot->parseEventRequest($body, $signature);
 
-	error_log("test print log ");
+error_log("events: ".$events);
     foreach ($events as $event){
 	
 		$reply_token = $event->getReplyToken();
