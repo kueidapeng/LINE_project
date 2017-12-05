@@ -18,12 +18,14 @@ $body = file_get_contents("php://input");
 error_log("Signature: ".$signature);
 
     $events = $bot->parseEventRequest($body, $signature);
-
+	
 error_log("events: ".$events);
     foreach ($events as $event){
+		//call push message 
+		// $test_userId=$event->getUserId();
+		// $reply_token = $event->getReplyToken();
+		// pushMessage($test_userId,"Example push text11111",getenv('curlHTTPClient')); // add by vito
 	
-		$reply_token = $event->getReplyToken();
-		
 		//follow event 
         if ($event instanceof \LINE\LINEBot\Event\FollowEvent) { 
 
@@ -112,6 +114,32 @@ error_log("events: ".$events);
 		}		
 	
     }
+	// function pushMessage($USERID, $msg,$token)
+    // {
+    //     $format_text = [
+    //         "type" => "text",
+    //         "text" => $msg
+    //     ];
  
+    //     $post_data = [
+    //         "to" => $USERID,
+    //         "messages" => [$format_text]
+    //     ];
+ 
+    //     $header = array(
+    //         'Content-Type: application/json',
+    //         'Authorization: Bearer ' . $token
+    //     );
+ 
+    //     $ch = curl_init('https://api.line.me/v2/bot/message/push');
+    //     curl_setopt($ch, CURLOPT_POST, true);
+    //     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+    //     curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+ 
+    //     $result = curl_exec($ch);
+    //     curl_close($ch);
+    // }
 
  ?>
