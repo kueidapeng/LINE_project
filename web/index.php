@@ -23,7 +23,7 @@ error_log("events: ".$events);
     foreach ($events as $event){
 		//call push message 
 		// $test_userId=$event->getUserId();
-		// $reply_token = $event->getReplyToken();
+		 $reply_token = $event->getReplyToken();
 		// pushMessage($test_userId,"Example push text11111",getenv('curlHTTPClient')); // add by vito
 	
 		//follow event 
