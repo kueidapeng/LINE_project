@@ -15,11 +15,11 @@ if (file_exists(__DIR__.'/.env')){
 $signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
 $body = file_get_contents("php://input");
 
-error_log("Signature: ".$signature);
+//error_log("Signature: ".$signature);
 
     $events = $bot->parseEventRequest($body, $signature);
 	
-error_log("events: ".$events);
+//error_log("events: ".$events);
     foreach ($events as $event){
 	
 		 $reply_token = $event->getReplyToken();
@@ -97,7 +97,7 @@ error_log("events: ".$events);
 		//location event 		
 		if ($event instanceof \LINE\LINEBot\Event\MessageEvent\LocationMessage) {
  
-			$address = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=".$event->getAddress()."&sensor=true_or_false"),true);
+			$address = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($event->getAddress())."&sensor=true_or_false"),true);
 			$zip_code = $address['results'][0]['address_components'][5]['long_name'];
 			
 			/*$getText = $event->getTitle().$event->getAddress().$event->getLatitude().$event->getLongitude()."zip_code=".$zip_code;
