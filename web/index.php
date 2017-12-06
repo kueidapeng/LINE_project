@@ -1,12 +1,12 @@
 <?php 
 
 require_once '../vendor/autoload.php';
-
+ 
 if (file_exists(__DIR__.'/.env')){
 	$dotenv = new Dotenv\Dotenv(__DIR__);	
 	$dotenv->load();
 }
-
+ 
  $bot = new \LINE\LINEBot(
   new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('curlHTTPClient')),
   ['channelSecret' => getenv('channelSecret')]
@@ -36,9 +36,16 @@ error_log("events: ".$events);
 			$displayName = $profile['displayName'];
 			//$statusMessage = $profile['statusMessage'];
 			//$pictureUrl = $profile['pictureUrl'];
+ 
+			$MultiMessageBuilder = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 			
-			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($displayName."你好呀!!!");  
-			$bot->replyMessage($reply_token, $textMessageBuilder);
+			$Text1 = $displayName." 你好".emoji('10002D')."\n\t感謝您加入卡好用帳號。".emoji('100080');  
+			$Text2 = "目前功能\n\t".emoji('1000B2')."[使用定位] 找出附近優惠。\n\t".emoji('1000B2')."[安安] 提供附近資訊。\n\t";
+ 
+			
+			$MultiMessageBuilder->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($Text1));
+			$MultiMessageBuilder->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($Text2));
+			$bot->replyMessage($reply_token, $MultiMessageBuilder);
  
  
         }
@@ -89,10 +96,36 @@ error_log("events: ".$events);
 
 		//location event 		
 		if ($event instanceof \LINE\LINEBot\Event\MessageEvent\LocationMessage) {
+ 
+			$address = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=".$event->getAddress()."&sensor=true_or_false"),true);
+			$zip_code = $address['results'][0]['address_components'][5]['long_name'];
 			
-			$getText = $event->getTitle().$event->getAddress().$event->getLatitude().$event->getLongitude();
-			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($getText);  
-			$bot->replyMessage($reply_token, $textMessageBuilder);
+			/*$getText = $event->getTitle().$event->getAddress().$event->getLatitude().$event->getLongitude()."zip_code=".$zip_code;
+			 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($getText);  
+			 $bot->replyMessage($reply_token, $textMessageBuilder);*/
+			
+			$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/categories/popular/brands?latlng=".$event->getLatitude().",".$event->getLongitude()."&zip_code=".$zip_code."&_offset=0"))->result->cat00456->brands;
+			$columns = array();
+			foreach($contents as $content){
+				
+				
+				$url="https://www.cardhoin.com/brand/".$content->id."/activity/".$content->activity->id;
+				
+				 
+				$actions = array(
+						new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("優惠連結",$url)
+					  );
+					  
+					  $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder($content->name,$content->activity->title, $content->logo_img_url, $actions);
+					  $columns[] = $column;
+			}
+		
+			$carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
+			$msg = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要在手機上才能看唷", $carousel);
+			$bot->replyMessage($reply_token,$msg);
+			
+			
+
 		}
 		
 		if ($event instanceof \LINE\LINEBot\Event\PostbackEvent) {
@@ -113,4 +146,14 @@ error_log("events: ".$events);
 		}		
 	
     }
+
+	//emoji unicode
+	function emoji($ID){
+ 
+	$bin = hex2bin(str_repeat('0', 8 - strlen($ID)) . $ID);
+	$emoticon =  mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
+	return $emoticon;
+	
+	}
+	
  ?>
