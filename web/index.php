@@ -97,9 +97,14 @@ $body = file_get_contents("php://input");
 		//location event 		
 		if ($event instanceof \LINE\LINEBot\Event\MessageEvent\LocationMessage) {
  
-			$address = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($event->getAddress())."&sensor=true_or_false"),true);
-			$zip_code = $address['results'][0]['address_components'][5]['long_name'];
-			
+			$address = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?latlng=".$event->getLatitude().",".$event->getLongitude()."&&sensor=false"),true);
+
+			for($i=0;$i<count($address['results'][0]['address_components']);$i++){
+				if($address['results'][0]['address_components'][$i]['types'][0]=='postal_code'){
+				$zip_code =substr($address['results'][0]['address_components'][$i]['long_name'],0,3); 
+				}
+			} 
+
 			/*$getText = $event->getTitle().$event->getAddress().$event->getLatitude().$event->getLongitude()."zip_code=".$zip_code;
 			 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($getText);  
 			 $bot->replyMessage($reply_token, $textMessageBuilder);*/
