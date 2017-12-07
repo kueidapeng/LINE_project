@@ -1,0 +1,3 @@
+[submodule "packages/line-bot-sdk-php"]
+	path = packages/line-bot-sdk-php
+	url = git@github.com:chliwei199/line-bot-sdk-php.git
