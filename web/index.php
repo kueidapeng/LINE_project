@@ -1,7 +1,7 @@
 <?php 
 
 require_once '../vendor/autoload.php';
- 
+ var_dump($_SERVER['HTTP_HOST']);
 if (file_exists(__DIR__.'/.env')){
 	$dotenv = new Dotenv\Dotenv(__DIR__);	
 	$dotenv->load();
