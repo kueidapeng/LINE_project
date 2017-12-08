@@ -39,15 +39,18 @@ $body = file_get_contents("php://input");
  
 			$MultiMessageBuilder = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 			
-			$Text1 = $displayName." 你好".emoji('10002D')."\n\t感謝您加入卡好用帳號。".emoji('100080');  
-			$Text2 = "目前功能\n\t".emoji('1000B2')."[使用定位] 找出附近優惠。\n\t".emoji('1000B2')."[安安] 提供附近資訊。\n\t";
+			$Text1 = $displayName."你好".emoji('10002D')."\r\n感謝您加入卡好用帳號，卡好用幫你整理銀行和商家合作的信用卡優惠，讓你將消費省下的小錢，漸漸累積成一筆小財富！。".emoji('100080');  
+			$Text2 = emoji('10003D')."卡好用APP\r\n".emoji('100084')."iOS - bit.ly/FBabout_iOS\r\n".emoji('100084')."Android - bit.ly/FBabout_Android\r\n";
  
-			
+			$originalContentUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/card.mp4';
+			$previewImageUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/video_img.png';
+ 
 			$MultiMessageBuilder->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($Text1));
+			$MultiMessageBuilder->add(new \LINE\LINEBot\MessageBuilder\VideoMessageBuilder($originalContentUrl,$previewImageUrl));
 			$MultiMessageBuilder->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($Text2));
 			$bot->replyMessage($reply_token, $MultiMessageBuilder);
- 
- 
+
+			
         }
 		
 		//join group event
@@ -69,7 +72,8 @@ $body = file_get_contents("php://input");
 				"carousel" => "bot_carousel",
 				"news" => "bot_news",	
 				"confirm" => "bot_confirm",				
-				"imagemap" => "bot_imagemap",	
+				"imagemap" => "bot_imagemap",
+				"video" => "bot_video",
 			];			
 
 			if(isset($array[$getText])){
@@ -97,7 +101,7 @@ $body = file_get_contents("php://input");
 		//location event 		
 		if ($event instanceof \LINE\LINEBot\Event\MessageEvent\LocationMessage) {
  
-			$address = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?latlng=".$event->getLatitude().",".$event->getLongitude()."&&sensor=false"),true);
+			$address = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?latlng=".$event->getLatitude().",".$event->getLongitude()."&sensor=false"),true);
 
 			for($i=0;$i<count($address['results'][0]['address_components']);$i++){
 				if($address['results'][0]['address_components'][$i]['types'][0]=='postal_code'){
@@ -108,7 +112,7 @@ $body = file_get_contents("php://input");
 			/*$getText = $event->getTitle().$event->getAddress().$event->getLatitude().$event->getLongitude()."zip_code=".$zip_code;
 			 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($getText);  
 			 $bot->replyMessage($reply_token, $textMessageBuilder);*/
-			
+
 			$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/categories/popular/brands?latlng=".$event->getLatitude().",".$event->getLongitude()."&zip_code=".$zip_code."&_offset=0"))->result->cat00456->brands;
 			$columns = array();
 			foreach($contents as $content){
@@ -121,15 +125,16 @@ $body = file_get_contents("php://input");
 						new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("優惠連結",$url)
 					  );
 					  
-					  $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder($content->name,$content->activity->title, $content->logo_img_url, $actions);
+					  $imagemap='https://maps.googleapis.com/maps/api/staticmap?center='.$content->branch->lat.','.$content->branch->lng.'&zoom=18&sensor=false&scale=1&size=600x300&maptype=roadmap&format=png&markers=size:mid%7Ccolor:0xf896b4%7Clabel:%7C'.$content->branch->lat.','.$content->branch->lng;
+					  $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder($content->name,$content->activity->title, $imagemap, $actions);
 					  $columns[] = $column;
-			}
 		
+				
+			}
+
 			$carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
 			$msg = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要在手機上才能看唷", $carousel);
 			$bot->replyMessage($reply_token,$msg);
-			
-			
 
 		}
 		
