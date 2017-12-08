@@ -28,28 +28,8 @@ $body = file_get_contents("php://input");
 		//follow event 
         if ($event instanceof \LINE\LINEBot\Event\FollowEvent) { 
 
-			$user_ID=$event->getUserId();
-			
-			//call get profile
-			$response = $bot->getProfile($user_ID);
-			$profile = $response->getJSONDecodedBody();
-			$displayName = $profile['displayName'];
-			//$statusMessage = $profile['statusMessage'];
-			//$pictureUrl = $profile['pictureUrl'];
- 
-			$MultiMessageBuilder = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
-			
-			$Text1 = $displayName."你好".emoji('10002D')."\r\n感謝您加入卡好用帳號，卡好用幫你整理銀行和商家合作的信用卡優惠，讓你將消費省下的小錢，漸漸累積成一筆小財富！。".emoji('100080');  
-			$Text2 = emoji('10003D')."卡好用APP\r\n".emoji('100084')."iOS - bit.ly/FBabout_iOS\r\n".emoji('100084')."Android - bit.ly/FBabout_Android\r\n";
- 
-			$originalContentUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/card.mp4';
-			$previewImageUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/video_img.png';
- 
-			$MultiMessageBuilder->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($Text1));
-			$MultiMessageBuilder->add(new \LINE\LINEBot\MessageBuilder\VideoMessageBuilder($originalContentUrl,$previewImageUrl));
-			$MultiMessageBuilder->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($Text2));
-			$bot->replyMessage($reply_token, $MultiMessageBuilder);
- 
+			include('event/follow_event/bot_follow_event.php');
+
         }
 		
 		//join group event
