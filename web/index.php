@@ -49,8 +49,7 @@ $body = file_get_contents("php://input");
 			$MultiMessageBuilder->add(new \LINE\LINEBot\MessageBuilder\VideoMessageBuilder($originalContentUrl,$previewImageUrl));
 			$MultiMessageBuilder->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($Text2));
 			$bot->replyMessage($reply_token, $MultiMessageBuilder);
-
-			
+ 
         }
 		
 		//join group event
@@ -131,10 +130,14 @@ $body = file_get_contents("php://input");
 		
 				
 			}
-
+			
+	
+		
 			$carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
 			$msg = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要在手機上才能看唷", $carousel);
 			$bot->replyMessage($reply_token,$msg);
+			
+			
 
 		}
 		
