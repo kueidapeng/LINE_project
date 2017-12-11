@@ -5,7 +5,8 @@
 	"require": {
 			"php": ">=5.6",
 			"vlucas/phpdotenv": "^2.4",
-			"ext-mbstring": "*"
+			"ext-mbstring": "*",
+		  "predis/predis": "^1.1"
 	  },
 	    "autoload": {
 			"psr-4": {
