@@ -1,5 +1,5 @@
 <?php 
-require_once 'event/RedisHandler.php';
+//require_once 'event/RedisHandler.php';
 require_once '../vendor/autoload.php';
 
  if (file_exists(__DIR__.'/.env')){
@@ -23,9 +23,9 @@ $body = file_get_contents("php://input");
     foreach ($events as $event){
 	
 		$reply_token = $event->getReplyToken();
-		$user_ID=$event->getUserId();
-		$redis= new RedisHandler;
-		$redis->checkUserId($user_ID);
+		// $user_ID=$event->getUserId();
+		// $redis= new RedisHandler;
+		// $redis->checkUserId($user_ID);
 
 		//follow event 
         if ($event instanceof \LINE\LINEBot\Event\FollowEvent) { 
