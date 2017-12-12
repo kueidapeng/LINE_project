@@ -18,7 +18,7 @@
 					.emoji('100080')."\r\n\r\n".emoji('10003D')."卡好用APP\r\n".emoji('100084')."iOS - bit.ly/FBabout_iOS\r\n".emoji('100084')."Android - bit.ly/FBabout_Android\r\n";
  
 		    $columns = array();
-			$baseUrl='https://'. $_SERVER['HTTP_HOST'].'/image/menu.png?_ignore=';
+			$baseUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/menu.png?_ignore=';
 			$altText="卡好用menu";
 			
 			$baseSizeBuilder = new \LINE\LINEBot\MessageBuilder\Imagemap\BaseSizeBuilder(1040,1040);
@@ -30,15 +30,15 @@
 			$linkUri1="https://www.cardhoin.com/category/today?offset=10";
 			$linkUri2="https://www.cardhoin.com/category/hot?offset=10";
 			$linkUri3="https://www.cardhoin.com/category/new?offset=10";
-			$linkUri4="test";
+			$linkUri4="座標優惠收尋";
 			
 			$columns[] = new \LINE\LINEBot\ImagemapActionBuilder\ImagemapUriActionBuilder($linkUri1,$areaBuilderLT);
 			$columns[] = new \LINE\LINEBot\ImagemapActionBuilder\ImagemapUriActionBuilder($linkUri2,$areaBuilderRT);
 			$columns[] = new \LINE\LINEBot\ImagemapActionBuilder\ImagemapUriActionBuilder($linkUri3,$areaBuilderLD);
 			$columns[] = new \LINE\LINEBot\ImagemapActionBuilder\ImagemapMessageActionBuilder($linkUri4,$areaBuilderRD);
 
-			$originalContentUrl='https://'. $_SERVER['HTTP_HOST'].'/image/card.mp4';
-			$previewImageUrl='https://'. $_SERVER['HTTP_HOST'].'/image/video_img.png';
+			$originalContentUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/card.mp4';
+			$previewImageUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/video_img.png';
  
 			$MultiMessageBuilder->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($Text));
 			$MultiMessageBuilder->add(new \LINE\LINEBot\MessageBuilder\ImagemapMessageBuilder($baseUrl,$altText,$baseSizeBuilder,$columns));

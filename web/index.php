@@ -53,12 +53,14 @@ $body = file_get_contents("php://input");
 				"confirm" => "bot_confirm",				
 				"imagemap" => "bot_imagemap",
 				"video" => "bot_video",
+				
+				"座標優惠收尋" => "bot_map_search",				
 			];			
 
 			if(isset($array[$getText])){
-			include('event/'.$array[$getText].'.php');
+			include('event/message_event/'.$array[$getText].'.php');
 			}else{ 
-			include('event/no_event.php');
+			include('event/message_event/no_event.php');
 			} 
 			
 			//單筆傳送
@@ -92,21 +94,22 @@ $body = file_get_contents("php://input");
 			 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($getText);  
 			 $bot->replyMessage($reply_token, $textMessageBuilder);*/
 
-			$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/categories/popular/brands?latlng=".$event->getLatitude().",".$event->getLongitude()."&zip_code=".$zip_code."&_offset=0"))->result->cat00456->brands;
+			$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/categories/today_usable/brands?latlng=".$event->getLatitude().",".$event->getLongitude()."&zip_code=".$zip_code."&_offset=0"))->result->cat00456->brands;
 			$columns = array();
 			foreach($contents as $content){
 				
 				
-				$url="https://www.cardhoin.com/brand/".$content->id."/activity/".$content->activity->id;
-				
+				$web_url="https://www.cardhoin.com/brand/".$content->id."/activity/".$content->activity->id;
+				$map_url="https://www.google.com.tw/maps/dir/".$content->branch->lat.','.$content->branch->lng."/".$event->getLatitude().",".$event->getLongitude();
 				 
 				$actions = array(
-						new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder("優惠連結",$url)
+						new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder(emoji('1F449')." 優惠連結",$web_url),
+						new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder(emoji('1F695')." 地圖導航",$map_url)
 					  );
-					  
-					  $imagemap='https://maps.googleapis.com/maps/api/staticmap?center='.$content->branch->lat.','.$content->branch->lng.'&zoom=18&sensor=false&scale=1&size=600x300&maptype=roadmap&format=png&markers=size:mid%7Ccolor:0xf896b4%7Clabel:%7C'.$content->branch->lat.','.$content->branch->lng;
-					  $column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder($content->name,$content->activity->title, $imagemap, $actions);
-					  $columns[] = $column;
+
+					  //$imagemap='https://maps.googleapis.com/maps/api/staticmap?center='.$content->branch->lat.','.$content->branch->lng.'&zoom=18&sensor=false&scale=1&size=600x300&maptype=roadmap&format=png&markers=size:mid%7Ccolor:0xf896b4%7Clabel:%7C'.$content->branch->lat.','.$content->branch->lng;
+				$column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder(emoji('1F4B3')." ".$content->activity->name,$content->activity->title, $content->logo_img_url, $actions);
+				$columns[] = $column;
 		
 				
 			}
