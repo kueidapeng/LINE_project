@@ -40,8 +40,8 @@
 			$columns[] = new \LINE\LINEBot\ImagemapActionBuilder\ImagemapUriActionBuilder($linkUri3,$areaBuilderLD);
 			$columns[] = new \LINE\LINEBot\ImagemapActionBuilder\ImagemapMessageActionBuilder($linkUri4,$areaBuilderRD);
 
-			$originalContentUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/card.mp4';
-			$previewImageUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/video_img.png';
+			$originalContentUrl='https://'. $_SERVER['HTTP_HOST'].'/image/card.mp4';
+			$previewImageUrl='https://'. $_SERVER['HTTP_HOST'].'/image/video_img.png';
  
 			$MultiMessageBuilder->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($Text));
 			$MultiMessageBuilder->add(new \LINE\LINEBot\MessageBuilder\ImagemapMessageBuilder($baseUrl,$altText,$baseSizeBuilder,$columns));
