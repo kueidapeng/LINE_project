@@ -1,31 +1,39 @@
 <?php 
-require_once 'event/RedisHandler.php';
 require_once '../vendor/autoload.php';
 
- if (file_exists(__DIR__.'/.env')){
-	$dotenv = new Dotenv\Dotenv(__DIR__);	
-	$dotenv->load();
-}
+ 	if (file_exists(__DIR__.'/.env')){
+		$dotenv = new Dotenv\Dotenv(__DIR__);	
+		$dotenv->load();
+	}
  
- $bot = new \LINE\LINEBot(
-  new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('curlHTTPClient')),
-  ['channelSecret' => getenv('channelSecret')]
-);
+ 	$bot = new LINE\LINEBot(
+  		new LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('curlHTTPClient')),
+  		['channelSecret' => getenv('channelSecret')]
+	);
  
-$signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-$body = file_get_contents("php://input");
+	$signature = $_SERVER["HTTP_".\LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
+	$body = file_get_contents("php://input");
+	$redis= new App\event\RedisHandler;				//create RedisHandler object
 
 //error_log("Signature: ".$signature);
 
     $events = $bot->parseEventRequest($body, $signature);
 	
-//error_log("events: ".$events);
+
     foreach ($events as $event){
 	
 		$reply_token = $event->getReplyToken();
-		$user_ID=$event->getUserId();
-		$redis= new RedisHandler;
-		$redis->checkUserId($user_ID);
+		$user_id=$event->getUserId();
+		
+		$result_id=$redis->checkUserId($user_id);
+		
+	//	$redis->addUserId($user_id);
+	//	$result_id=$redis->checkUserId($user_id);
+		
+	//	$redis->deleteUserId($user_id);
+	//	$result_id=$redis->checkUserId($user_id);
+		
+	//	$result_Location=$redis->checkUserLocation($user_id,'123','456');
 
 		//follow event 
         if ($event instanceof \LINE\LINEBot\Event\FollowEvent) { 
@@ -65,20 +73,6 @@ $body = file_get_contents("php://input");
 			include('event/message_event/no_event.php');
 			} 
 			
-			//單筆傳送
-			/*
-			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($getText); //文字
-			$stickerMessageBuilder = new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(1,17); //貼圖
-			
-			$response = $bot->replyMessage($reply_token, $stickerMessageBuilder);
-			$response =  $bot->replyMessage($reply_token, $textMessageBuilder);
-			
-
-			$MultiMessageBuilder = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
-			$MultiMessageBuilder->add(new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($getText)); 
-			$MultiMessageBuilder->add(new \LINE\LINEBot\MessageBuilder\StickerMessageBuilder(1,17)); 
-			
-			$bot->replyMessage($reply_token, $MultiMessageBuilder);*/
         }
 
 		//location event 		
