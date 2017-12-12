@@ -1,8 +1,8 @@
 <?php 
-
+require_once 'event/RedisHandler.php';
 require_once '../vendor/autoload.php';
- 
-if (file_exists(__DIR__.'/.env')){
+
+ if (file_exists(__DIR__.'/.env')){
 	$dotenv = new Dotenv\Dotenv(__DIR__);	
 	$dotenv->load();
 }
@@ -22,9 +22,11 @@ $body = file_get_contents("php://input");
 //error_log("events: ".$events);
     foreach ($events as $event){
 	
-		 $reply_token = $event->getReplyToken();
-	
-	
+		$reply_token = $event->getReplyToken();
+		$user_ID=$event->getUserId();
+		$redis= new RedisHandler;
+		$redis->checkUserId($user_ID);
+
 		//follow event 
         if ($event instanceof \LINE\LINEBot\Event\FollowEvent) { 
 
@@ -83,6 +85,7 @@ $body = file_get_contents("php://input");
 		if ($event instanceof \LINE\LINEBot\Event\MessageEvent\LocationMessage) {
  
 			$address = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?latlng=".$event->getLatitude().",".$event->getLongitude()."&sensor=false"),true);
+
 
 			for($i=0;$i<count($address['results'][0]['address_components']);$i++){
 				if($address['results'][0]['address_components'][$i]['types'][0]=='postal_code'){

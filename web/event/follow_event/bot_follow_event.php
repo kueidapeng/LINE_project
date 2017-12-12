@@ -18,7 +18,14 @@
 					.emoji('100080')."\r\n\r\n".emoji('10003D')."卡好用APP\r\n".emoji('100084')."iOS - bit.ly/FBabout_iOS\r\n".emoji('100084')."Android - bit.ly/FBabout_Android\r\n";
  
 		    $columns = array();
+<<<<<<< HEAD
 			$baseUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/menu.png?_ignore=';
+=======
+			$baseUrl='https://'. $_SERVER['HTTP_HOST'].'/image/menu.png?_ignore=';
+error_log('1.$baseUrl: '.$baseUrl);
+error_log('2.$profile: '.$profile);
+
+>>>>>>> 6167f3a19ec3fe1e66af5fc3eca154ef52a79038
 			$altText="卡好用menu";
 			
 			$baseSizeBuilder = new \LINE\LINEBot\MessageBuilder\Imagemap\BaseSizeBuilder(1040,1040);
