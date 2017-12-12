@@ -6,7 +6,7 @@ class RedisHandler {
     public function __construct()
     {
        Predis\Autoloader::register();
-       $this->redis = new Predis\Client();
+       $this->redis = new Predis\Client(getenv('REDIS_URL'));
     }
     public function checkUserId($userId)
     {
