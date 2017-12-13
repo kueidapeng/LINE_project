@@ -77,7 +77,9 @@ require_once '../vendor/autoload.php';
 
 		//location event 		
 		if ($event instanceof \LINE\LINEBot\Event\MessageEvent\LocationMessage) {
- 
+		//	$result_Location=$redis->addUserLocation($user_id,$event->getLatitude(),$event->getLongitude());
+		//	$result_Location=$redis->updateUserLocation($user_id,$event->getLatitude(),$event->getLongitude());
+	
 			$address = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?latlng=".$event->getLatitude().",".$event->getLongitude()."&sensor=false"),true);
 
 
