@@ -8,7 +8,7 @@
 							new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder(emoji('1F5FE')." 定位收尋",$content->name)
 							);
 							
-							$column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder($content->description,$content->name, 'https://'. $_SERVER['HTTP_HOST'].'/image/'.$content->category_code.'.png', $actions);
+							$column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder($content->description,$content->name, 'https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/'.$content->category_code.'.png', $actions);
 							$columns[] = $column;
 			
 					

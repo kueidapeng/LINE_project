@@ -15,7 +15,7 @@ require_once '../vendor/autoload.php';
 	$body = file_get_contents("php://input");
 	$redis= new App\event\RedisHandler;				//create RedisHandler object
 
-//error_log("Signature: ".$signature);
+	//error_log("Signature: ".$signature);
 
     $events = $bot->parseEventRequest($body, $signature);
 	
@@ -64,9 +64,12 @@ require_once '../vendor/autoload.php';
 				"imagemap" => "bot_imagemap",
 				"video" => "bot_video",
 				
-				"座標優惠收尋" => "bot_map_search",				
+				"座標優惠收尋" => "bot_map_search",
+				preg_match ("/\類別：/i", $getText) == 1 ? $getText : "" => "bot_category",			
 			];			
 
+			$sss =preg_match ("/\類別:/i", $getText);
+			 
 			if(isset($array[$getText])){
 			include('event/message_event/'.$array[$getText].'.php');
 			}else{ 

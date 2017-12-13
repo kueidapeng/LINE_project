@@ -1,7 +1,7 @@
 ﻿ 
 <?php
-			$originalContentUrl="https://4.share.photo.xuite.net/min0427/140d536/6411593/262027757_x.jpg";
-			$previewImageUrl="https://4.share.photo.xuite.net/min0427/140d536/6411593/262027757_x.jpg";
+			$originalContentUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/location_desc.png';
+			$previewImageUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/location_desc.png';
  
 			$ImageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($originalContentUrl,$previewImageUrl); //文字
  
