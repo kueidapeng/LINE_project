@@ -28,6 +28,30 @@ class RedisHandler {
       $result= UtilityHandler::toBoolean($this->redis->exists($user_id));
       return $result;
     }
+    public function checkLocation($user_id)
+    {
+      $result= UtilityHandler::toBoolean($this->redis->exists($user_id));
+      $user=$this->redis->hgetall($user_id);
+      if(empty($user))
+      {
+        return UtilityHandler::toBoolean(0);
+      }
+      if(isset($user['latitude']) && isset($user['longitude'])){
+          $result=1;        
+       }else{
+          $result=0;        
+       }
+
+      return $result;
+    }
+
+    public function getLocation($user_id)
+    {
+      $result= UtilityHandler::toBoolean($this->redis->exists($user_id));
+      $user=$this->redis->hgetall($user_id);
+      $result=$user['latitude'].",".$user['longitude'];
+      return $result;
+    }   
     public function addUserLocation($user_id,$latitude,$longitude)
     {
       if($user_id==='' || $latitude==='' || $longitude===''){

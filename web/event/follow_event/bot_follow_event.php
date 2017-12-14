@@ -19,7 +19,7 @@
 					.emoji('100080')."\r\n\r\n".emoji('10003D')."卡好用APP\r\n".emoji('100084')."iOS - bit.ly/FBabout_iOS\r\n".emoji('100084')."Android - bit.ly/FBabout_Android\r\n";
  
 		    $columns = array();
-			$baseUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/menu.png?_ignore=';
+			$baseUrl='https://'. $_SERVER['HTTP_HOST'].'/image/menu.png?_ignore=';
 			//error_log('1.$baseUrl: '.$baseUrl);
 			//error_log('2.$profile: '.$profile);
 
@@ -41,8 +41,8 @@
 			$columns[] = new LINE\LINEBot\ImagemapActionBuilder\ImagemapUriActionBuilder($linkUri3,$areaBuilderLD);
 			$columns[] = new LINE\LINEBot\ImagemapActionBuilder\ImagemapMessageActionBuilder($linkUri4,$areaBuilderRD);
 
-			$originalContentUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/card.mp4';
-			$previewImageUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/video_img.png';
+			$originalContentUrl='https://'. $_SERVER['HTTP_HOST'].'/image/card.mp4';
+			$previewImageUrl='https://'. $_SERVER['HTTP_HOST'].'/image/video_img.png';
  
 			$MultiMessageBuilder->add(new LINE\LINEBot\MessageBuilder\TextMessageBuilder($Text));
 			$MultiMessageBuilder->add(new LINE\LINEBot\MessageBuilder\ImagemapMessageBuilder($baseUrl,$altText,$baseSizeBuilder,$columns));

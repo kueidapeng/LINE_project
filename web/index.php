@@ -25,28 +25,34 @@ require_once '../vendor/autoload.php';
 		$reply_token = $event->getReplyToken();
 		$user_id=$event->getUserId();
 		
-		$result_id=$redis->checkUserId($user_id);
-		
-	//	$redis->addUserId($user_id);
-	//	$result_id=$redis->checkUserId($user_id);
-		
-	//	$redis->deleteUserId($user_id);
-	//	$result_id=$redis->checkUserId($user_id);
-		
-	//	$result_Location=$redis->checkUserLocation($user_id,'123','456');
+		//$result_id=$redis->checkUserId($user_id);
+		//$redis->addUserId($user_id);
+		//$result_id=$redis->checkUserId($user_id);
+		//$redis->deleteUserId($user_id);
+		//$result_id=$redis->checkUserId($user_id);
+	 	//$result_Location=$redis->checkLocation($user_id);
+		// $redis->addUserLocation($user_id,$latitude,$longitude);
 
 		//follow event 
         if ($event instanceof \LINE\LINEBot\Event\FollowEvent) { 
 
 			include('event/follow_event/bot_follow_event.php');
 
-        }
+		}
+		
+		//follow event 
+        if ($event instanceof \LINE\LINEBot\Event\UnfollowEvent) { 
+	 
+			include('event/follow_event/bot_unfollow_event.php');
+			
+		}
+
 		
 		//join group event
         if ($event instanceof \LINE\LINEBot\Event\JoinEvent) { 
 
-			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("Hello everybody");  
-			$bot->replyMessage($reply_token, $textMessageBuilder);
+			include('event/join_event/bot_join_event.php');			
+
  
         }
  
@@ -61,15 +67,13 @@ require_once '../vendor/autoload.php';
 				"carousel" => "bot_carousel",
 				"news" => "bot_news",	
 				"confirm" => "bot_confirm",				
-				"imagemap" => "bot_imagemap",
 				"video" => "bot_video",
-				
+				//==================================
 				"座標優惠收尋" => "bot_map_search",
+				"卡好用服務" => "bot_imagemap",
 				preg_match ("/\類別：/i", $getText) == 1 ? $getText : "" => "bot_category",			
 			];			
 
-			$sss =preg_match ("/\類別:/i", $getText);
-			 
 			if(isset($array[$getText])){
 			include('event/message_event/'.$array[$getText].'.php');
 			}else{ 
@@ -80,49 +84,19 @@ require_once '../vendor/autoload.php';
 
 		//location event 		
 		if ($event instanceof \LINE\LINEBot\Event\MessageEvent\LocationMessage) {
-		//	$result_Location=$redis->addUserLocation($user_id,$event->getLatitude(),$event->getLongitude());
-		//	$result_Location=$redis->updateUserLocation($user_id,$event->getLatitude(),$event->getLongitude());
-	
-			$address = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?latlng=".$event->getLatitude().",".$event->getLongitude()."&sensor=false"),true);
 
-
-			for($i=0;$i<count($address['results'][0]['address_components']);$i++){
-				if($address['results'][0]['address_components'][$i]['types'][0]=='postal_code'){
-				$zip_code =substr($address['results'][0]['address_components'][$i]['long_name'],0,3); 
-				}
-			} 
-
-			/*$getText = $event->getTitle().$event->getAddress().$event->getLatitude().$event->getLongitude()."zip_code=".$zip_code;
-			 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($getText);  
-			 $bot->replyMessage($reply_token, $textMessageBuilder);*/
-
-			$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/categories/today_usable/brands?latlng=".$event->getLatitude().",".$event->getLongitude()."&zip_code=".$zip_code."&_offset=0"))->result->cat00456->brands;
-			$columns = array();
-			foreach($contents as $content){
+			if($redis->checkLocation($user_id)==0){ // location add
+				$result_Location=$redis->addUserLocation($user_id,$event->getLatitude(),$event->getLongitude());
 				
-				
-				$web_url="https://www.cardhoin.com/brand/".$content->id."/activity/".$content->activity->id;
-				$map_url="https://www.google.com.tw/maps/dir/".$content->branch->lat.','.$content->branch->lng."/".$event->getLatitude().",".$event->getLongitude();
-				 
-				$actions = array(
-						new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder(emoji('1F449')." 優惠連結",$web_url),
-						new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder(emoji('1F695')." 地圖導航",$map_url)
-					  );
+				$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("所在座標已新增".emoji('10008F')); //文字
+				$response =  $bot->replyMessage($reply_token, $textMessageBuilder);
+			}else{ // location update	
+				$result_Location=$redis->updateUserLocation($user_id,$event->getLatitude(),$event->getLongitude());
 
-					  //$imagemap='https://maps.googleapis.com/maps/api/staticmap?center='.$content->branch->lat.','.$content->branch->lng.'&zoom=18&sensor=false&scale=1&size=600x300&maptype=roadmap&format=png&markers=size:mid%7Ccolor:0xf896b4%7Clabel:%7C'.$content->branch->lat.','.$content->branch->lng;
-				$column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder(emoji('1F4B3')." ".$content->activity->name,$content->activity->title, $content->logo_img_url, $actions);
-				$columns[] = $column;
-		
-				
+				$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("所在座標已更新".emoji('10008F')); //文字
+				$response =  $bot->replyMessage($reply_token, $textMessageBuilder);
 			}
-			
-	
-		
-			$carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
-			$msg = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要在手機上才能看唷", $carousel);
-			$bot->replyMessage($reply_token,$msg);
-			
-			
+ 
 
 		}
 		
