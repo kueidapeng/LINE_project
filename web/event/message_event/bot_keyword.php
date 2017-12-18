@@ -7,8 +7,8 @@
 
 	}else if($redis->checkLocation($user_id)==0){ //no location
 
-		$originalContentUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/location_desc.png';
-		$previewImageUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/location_desc.png';
+		$originalContentUrl='https://'. $_SERVER['HTTP_HOST'].'/image/location_desc.png';
+		$previewImageUrl='https://'. $_SERVER['HTTP_HOST'].'/image/location_desc.png';
 
 		$MultiMessageBuilder = new LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 

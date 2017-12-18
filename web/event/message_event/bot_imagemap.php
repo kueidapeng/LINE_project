@@ -1,7 +1,7 @@
 ﻿ <?php
 
 			$columns = array();
-			$baseUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/menu.png?_ignore=';
+			$baseUrl='https://'. $_SERVER['HTTP_HOST'].'/image/menu.png?_ignore=';
 			//error_log('1.$baseUrl: '.$baseUrl);
 			//error_log('2.$profile: '.$profile);
 

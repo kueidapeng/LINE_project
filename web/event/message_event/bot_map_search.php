@@ -1,6 +1,6 @@
 <?php
  
- 	$thumbnailImageUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/location_search.png?_ignore=';
+ 	$thumbnailImageUrl='https://'. $_SERVER['HTTP_HOST'].'/image/location_search.png?_ignore=';
 	$actions = array(
 		new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder(emoji('1F5FE')." 類別搜尋",'類別搜尋'),
 		new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder(emoji('1F5FE')." 關鍵字搜尋",'關鍵字搜尋')
