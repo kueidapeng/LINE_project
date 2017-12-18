@@ -59,7 +59,18 @@ require_once '../vendor/autoload.php';
 		//text event 
         if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) {
 			$getText = $event->getText();
- 
+
+			$user_status=$redis->checkStatus($user_id); //user status
+
+			switch ($user_status) {
+				case 'map_key':
+				$getText = '關鍵字：'.$getText;
+				break;
+				case 'map_cat':
+				$getText = '類別：'.$getText;
+				break;				
+			}
+
 			$array = [
 				"安安" => "bot_event1",
 				"掰掰" => "bot_event2",
@@ -69,9 +80,12 @@ require_once '../vendor/autoload.php';
 				"confirm" => "bot_confirm",				
 				"video" => "bot_video",
 				//==================================
-				"座標優惠收尋" => "bot_map_search",
+				"座標優惠搜尋" => "bot_map_search",
+				"類別搜尋" => "bot_map_search_cat",
+				"關鍵字搜尋" => "bot_map_search_key",
 				"卡好用服務" => "bot_imagemap",
-				preg_match ("/\類別：/i", $getText) == 1 ? $getText : "" => "bot_category",			
+				preg_match ("/\類別：/i", $getText) == 1 ? $getText : "" => "bot_category",
+				preg_match ("/\關鍵字：/i", $getText) == 1 ? $getText : "" => "bot_keyword",
 			];			
 
 			if(isset($array[$getText])){

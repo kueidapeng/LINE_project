@@ -103,6 +103,27 @@ class RedisHandler {
          }
         return UtilityHandler::toBoolean($result);
     }
-   
+    public function checkStatus($user_id)
+    {
+      $result= UtilityHandler::toBoolean($this->redis->exists($user_id));
+      $user=$this->redis->hgetall($user_id);
+      $result=$user['status'];      
+      return $result;
+    }
+    public function updateUserStatus($user_id,$status)
+    {
+      if($user_id===''){
+        return UtilityHandler::toBoolean(0);
+      }
+           
+      try {
+       $this->redis->hset($user_id,'status',$status);
+      } catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+      }
+     
+       return UtilityHandler::toBoolean(1);
+    }
+
    
 }

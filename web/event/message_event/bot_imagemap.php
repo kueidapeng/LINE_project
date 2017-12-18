@@ -1,7 +1,7 @@
 ﻿ <?php
 
 			$columns = array();
-			$baseUrl='https://'. $_SERVER['HTTP_HOST'].'/image/menu.png?_ignore=';
+			$baseUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/menu.png?_ignore=';
 			//error_log('1.$baseUrl: '.$baseUrl);
 			//error_log('2.$profile: '.$profile);
 
@@ -16,7 +16,7 @@
 			$linkUri1="https://www.cardhoin.com/category/today?offset=10";
 			$linkUri2="https://www.cardhoin.com/category/hot?offset=10";
 			$linkUri3="https://www.cardhoin.com/category/new?offset=10";
-			$linkUri4="座標優惠收尋";
+			$linkUri4="座標優惠搜尋";
 
 			$columns[] = new LINE\LINEBot\ImagemapActionBuilder\ImagemapUriActionBuilder($linkUri1,$areaBuilderLT);
 			$columns[] = new LINE\LINEBot\ImagemapActionBuilder\ImagemapUriActionBuilder($linkUri2,$areaBuilderRT);
