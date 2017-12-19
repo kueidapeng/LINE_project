@@ -24,14 +24,6 @@ require_once '../vendor/autoload.php';
 	
 		$reply_token = $event->getReplyToken();
 		$user_id=$event->getUserId();
-		
-		//$result_id=$redis->checkUserId($user_id);
-		//$redis->addUserId($user_id);
-		//$result_id=$redis->checkUserId($user_id);
-		//$redis->deleteUserId($user_id);
-		//$result_id=$redis->checkUserId($user_id);
-	 	//$result_Location=$redis->checkLocation($user_id);
-		// $redis->addUserLocation($user_id,$latitude,$longitude);
 
 		//follow event 
         if ($event instanceof \LINE\LINEBot\Event\FollowEvent) { 
@@ -72,14 +64,6 @@ require_once '../vendor/autoload.php';
 			}
 
 			$array = [
-				"安安" => "bot_event1",
-				"掰掰" => "bot_event2",
-				"顆顆" => "bot_event3",
-				"carousel" => "bot_carousel",
-				"news" => "bot_news",	
-				"confirm" => "bot_confirm",				
-				"video" => "bot_video",
-				//==================================
 				"座標優惠搜尋" => "bot_map_search",
 				"類別搜尋" => "bot_map_search_cat",
 				"關鍵字搜尋" => "bot_map_search_key",
@@ -120,11 +104,18 @@ require_once '../vendor/autoload.php';
 			
 			if ($getText) {
 				parse_str($getText, $data);
-				if (isset($data["ans"])) {
+				if (isset($data["map_key"])) {
 					
-					$page = $data["ans"];
-					$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($page);  
-					$bot->replyMessage($reply_token, $textMessageBuilder);					
+					$page = $data["map_key"];
+
+					switch ($page) {
+						case 'Y':
+						include('event/message_event/bot_map_search_key.php');
+						break;
+						case 'N':
+						include('event/message_event/bot_imagemap.php');
+						break;				
+					}
 
 				}
 			}

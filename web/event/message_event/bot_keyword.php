@@ -1,25 +1,6 @@
 ﻿<?php
  
-	if($redis->checkUserId($user_id)==0){  //no user_id
-
-		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("請加入卡好用BOT才能享有此功能唷"); //文字
-		$response =  $bot->replyMessage($reply_token, $textMessageBuilder);
-
-	}else if($redis->checkLocation($user_id)==0){ //no location
-
-		$originalContentUrl='https://'. $_SERVER['HTTP_HOST'].'/image/location_desc.png';
-		$previewImageUrl='https://'. $_SERVER['HTTP_HOST'].'/image/location_desc.png';
-
-		$MultiMessageBuilder = new LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
-
-		$ImageMessageBuilder = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($originalContentUrl,$previewImageUrl); //文字
-		$Text = new LINE\LINEBot\MessageBuilder\TextMessageBuilder("定位完成以後請再次點選定定位收尋(若想更改座標重新定位)。".emoji('100033'));
-		$MultiMessageBuilder->add($ImageMessageBuilder);
-		$MultiMessageBuilder->add($Text);
-		$bot->replyMessage($reply_token, $MultiMessageBuilder);
-
-	}else{
-
+ 		$MultiMessageBuilder = new LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 		$redis->updateUserStatus($user_id,'');
 		$Text=str_replace("關鍵字：", '', $getText);
  
@@ -38,6 +19,16 @@
 					//$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/categories/today_usable/brands?latlng=".$event->getLatitude().",".$event->getLongitude()."&zip_code=".$zip_code."&_offset=0"))->result->cat00456->brands;
 
 					$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/branches/search_t2?latlng=".$latlng."&zip_code=".$zip_code."&keyword=".urlencode($Text)))->result->act006->branches;
+					
+					if(empty($contents)){
+
+						$text = emoji('10002D')."很抱歉，找不到您要的優惠。";
+						$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text);  
+ 
+						$MultiMessageBuilder->add($textMessageBuilder);
+ 
+
+					}else{
 					$columns = array();
 					foreach($contents as $content){
 						
@@ -57,17 +48,25 @@
 				
 						
 					}
-					
-			
-				
+		 
 					$carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
 					$msg = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要在手機上才能看唷", $carousel);
-					$bot->replyMessage($reply_token,$msg);
+ 
+					$MultiMessageBuilder->add($msg);
+ 
+					}
 
 
+					$actions = array(
+						new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("是", "map_key=Y"),
+						new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("否", "map_key=N")
+					  );
+					$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder("是否要在搜尋其他優惠？", $actions);
+					$msg2 = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要用手機的賴才看的到哦", $button);
+										
 
-	}
-		 
+					$MultiMessageBuilder->add($msg2);
+					$bot->replyMessage($reply_token,$MultiMessageBuilder);	
  
 
 ?>

@@ -1,24 +1,5 @@
 <?php
  
-	if($redis->checkUserId($user_id)==0){  //no user_id
-
-		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("請加入卡好用BOT才能享有此功能唷"); //文字
-		$response =  $bot->replyMessage($reply_token, $textMessageBuilder);
-
-	}else if($redis->checkLocation($user_id)==0){ //no location
-
-		$originalContentUrl='https://'. $_SERVER['HTTP_HOST'].'/image/location_desc.png';
-		$previewImageUrl='https://'. $_SERVER['HTTP_HOST'].'/image/location_desc.png';
-
-		$MultiMessageBuilder = new LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
-
-		$ImageMessageBuilder = new LINE\LINEBot\MessageBuilder\ImageMessageBuilder($originalContentUrl,$previewImageUrl); //文字
-		$Text = new LINE\LINEBot\MessageBuilder\TextMessageBuilder("定位完成以後請再次點選定定位收尋(若想更改座標重新定位)。".emoji('100033'));
-		$MultiMessageBuilder->add($ImageMessageBuilder);
-		$MultiMessageBuilder->add($Text);
-		$bot->replyMessage($reply_token, $MultiMessageBuilder);
-
-	}else{
 		
 		$redis->updateUserStatus($user_id,'');
 		$Text=str_replace("類別：", '', $getText);
@@ -47,6 +28,17 @@
 					//$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/categories/today_usable/brands?latlng=".$event->getLatitude().",".$event->getLongitude()."&zip_code=".$zip_code."&_offset=0"))->result->cat00456->brands;
 
 					$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/categories_a/".$category_id."/brands/distinct?latlng=".$latlng."&zip_code=".$zip_code."&_offset=0"))->result->cat003->brands;
+					
+					if(empty($contents)){
+						
+						$text = emoji('10002D')."很抱歉，您的所在地找不到".$Text."的相關優惠。";
+						$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text);  
+						 
+						$bot->replyMessage($reply_token,$textMessageBuilder);
+						 
+						
+					}else{
+					
 					$columns = array();
 					foreach($contents as $content){
 						
@@ -73,10 +65,7 @@
 					$msg = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要在手機上才能看唷", $carousel);
 					$bot->replyMessage($reply_token,$msg);
 
-
-
-	}
-		 
+					}
  
 
 ?>
