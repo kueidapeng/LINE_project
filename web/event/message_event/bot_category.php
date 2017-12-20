@@ -1,6 +1,6 @@
 <?php
  
-		
+ 		$MultiMessageBuilder = new LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 		$redis->updateUserStatus($user_id,'');
 		$Text=str_replace("類別：", '', $getText);
 		$category = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/categories?page_type=menu"),true);
@@ -33,9 +33,8 @@
 						
 						$text = emoji('10002D')."很抱歉，您的所在地找不到".$Text."的相關優惠。";
 						$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text);  
-						 
-						$bot->replyMessage($reply_token,$textMessageBuilder);
-						 
+ 
+						$MultiMessageBuilder->add($textMessageBuilder);
 						
 					}else{
 					
@@ -63,9 +62,21 @@
 				
 					$carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
 					$msg = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要在手機上才能看唷", $carousel);
-					$bot->replyMessage($reply_token,$msg);
+					$MultiMessageBuilder->add($msg);
 
 					}
+ 
+					
+					$actions = array(
+						new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("是", "map_cat=Y"),
+						new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("否", "map_cat=N")
+					  );
+					$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder("是否要選擇其他類別？", $actions);
+					$msg2 = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要用手機的賴才看的到哦", $button);
+										
+
+					$MultiMessageBuilder->add($msg2);
+					$bot->replyMessage($reply_token,$MultiMessageBuilder);	
  
 
 ?>

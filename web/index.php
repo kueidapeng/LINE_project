@@ -83,42 +83,14 @@ require_once '../vendor/autoload.php';
 		//location event 		
 		if ($event instanceof \LINE\LINEBot\Event\MessageEvent\LocationMessage) {
 
-			if($redis->checkLocation($user_id)==0){ // location add
-				$result_Location=$redis->addUserLocation($user_id,$event->getLatitude(),$event->getLongitude());
-				
-				$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("所在座標已新增".emoji('10008F')); //文字
-				$response =  $bot->replyMessage($reply_token, $textMessageBuilder);
-			}else{ // location update	
-				$result_Location=$redis->updateUserLocation($user_id,$event->getLatitude(),$event->getLongitude());
-
-				$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("所在座標已更新".emoji('10008F')); //文字
-				$response =  $bot->replyMessage($reply_token, $textMessageBuilder);
-			}
- 
+			include('event/location_event/bot_location_event.php');
 
 		}
 		
 		if ($event instanceof \LINE\LINEBot\Event\PostbackEvent) {
-			
-			$getText = $event->getPostbackData();
-			
-			if ($getText) {
-				parse_str($getText, $data);
-				if (isset($data["map_key"])) {
-					
-					$page = $data["map_key"];
 
-					switch ($page) {
-						case 'Y':
-						include('event/message_event/bot_map_search_key.php');
-						break;
-						case 'N':
-						include('event/message_event/bot_imagemap.php');
-						break;				
-					}
+			include('event/postback_event/bot_postback_event.php');			
 
-				}
-			}
 
 		}		
 	

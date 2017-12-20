@@ -7,7 +7,7 @@
 		);
 				
  
-	$carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("座標優惠搜尋","你可以使用定位座標點，用關鍵字或是類別找出您要的優惠訊息。", $thumbnailImageUrl,$actions);
+	$carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("座標優惠搜尋","你可以使用定位座標點，用關鍵字或類別找出您要的優惠訊息。", $thumbnailImageUrl,$actions);
 	$msg = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要在手機上才能看唷", $carousel);
 	$bot->replyMessage($reply_token,$msg);
 
