@@ -75,7 +75,12 @@ require_once '../vendor/autoload.php';
 			if(isset($array[$getText])){
 			include('event/message_event/'.$array[$getText].'.php');
 			}else{ 
-			include('event/message_event/no_event.php');
+			   $result= find_synonym(urlencode($getText));
+			   if($result!=='bot_imagemap')
+				include('event/message_event/no_event.php');
+			   else{
+				include('event/message_event/bot_imagemap.php');  
+			   }
 			} 
 			
         }
@@ -98,11 +103,23 @@ require_once '../vendor/autoload.php';
 
 	//emoji unicode
 	function emoji($ID){
- 
-	$bin = hex2bin(str_repeat('0', 8 - strlen($ID)) . $ID);
-	$emoticon =  mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
-	return $emoticon;
-	
+ 		$bin = hex2bin(str_repeat('0', 8 - strlen($ID)) . $ID);
+		$emoticon =  mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
+		return $emoticon;
 	}
-	
+	//Dialogflow find synonym
+	function find_synonym($getText){
+		$ch = curl_init();
+		// set url
+		curl_setopt($ch, CURLOPT_URL, "https://api.dialogflow.com/v1/query?v=20170712&query='.$getText.'&lang=en&sessionId=" .trim(getenv('sessionID')));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Authorization: Bearer '.trim(getenv('CLIENT_ACCESS_TOKEN'))));
+		//return the transfer as a string
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		// $output contains the output string
+		$output = curl_exec($ch);
+		// close curl resource to free up system resources
+		curl_close($ch);
+	  return  json_decode($output)->result->fulfillment->speech;
+   }
+
  ?>
