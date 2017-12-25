@@ -6,6 +6,7 @@ if (file_exists(__DIR__.'/.env')){
 	$dotenv->load();
 }
 
+
 $ffmpeg = \FFMpeg\FFMpeg::create(array(
     'ffmpeg.binaries'  => getenv('ffmpeg_path'),
     'ffprobe.binaries' => getenv('ffprobe_path'),
