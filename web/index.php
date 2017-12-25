@@ -1,11 +1,24 @@
 <?php 
 require_once '../vendor/autoload.php';
 
- 	if (file_exists(__DIR__.'/.env')){
-		$dotenv = new Dotenv\Dotenv(__DIR__);	
-		$dotenv->load();
-	}
- 
+if (file_exists(__DIR__.'/.env')){
+	$dotenv = new Dotenv\Dotenv(__DIR__);	
+	$dotenv->load();
+}
+
+$ffmpeg = \FFMpeg\FFMpeg::create(array(
+    'ffmpeg.binaries'  => getenv('ffmpeg_path'),
+    'ffprobe.binaries' => getenv('ffprobe_path'),
+));
+$audio = $ffmpeg->open('voice3.aac');
+
+$format = new FFMpeg\Format\Audio\Flac();
+$format->on('progress', function ($audio, $format, $percentage) {
+    echo "$percentage % transcoded";
+});
+$format->setAudioChannels(1);
+$audio->save($format, 'voice3.flac');
+
  	$bot = new LINE\LINEBot(
   		new LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('curlHTTPClient')),
   		['channelSecret' => getenv('channelSecret')]
