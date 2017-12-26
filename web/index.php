@@ -158,20 +158,23 @@ use Google\Cloud\Speech\SpeechClient;
 				  $data=date('Y-h-m-h-i-s');
 				  $soundfile =  file_put_contents('./tmp/'.$data.'.aac', $audio);
 
+				  $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("正在分析語音請稍後..."); //文字
+				  $response = $bot->pushMessage($user_id, $textMessageBuilder); //message push	
+
 				  $ffmpeg = \FFMpeg\FFMpeg::create(array(
 					'ffmpeg.binaries'  => getenv('ffmpeg_path'),
 					'ffprobe.binaries' => getenv('ffprobe_path'),
 				));
 				
-				$audio = $ffmpeg->open('./tmp/'.$data.'.aac');
-				
+				$audio = $ffmpeg->open('./tmp/'.$data.'.aac');				
+
 				$format = new FFMpeg\Format\Audio\Flac();
 				$format->on('progress', function ($audio, $format, $percentage) {
 					echo "$percentage % transcoded";
 				});
 				$format->setAudioChannels(1);
 				$audio->save($format, './tmp/'.$data.'.flac');
-				
+ 
 				$speech_json=[
 					"type"=> getenv('type'),
 					"project_id"=> getenv('project_id'),
@@ -193,6 +196,7 @@ use Google\Cloud\Speech\SpeechClient;
 				]);
 				
 				// Recognize the speech in an audio file.
+
 				$results = $speech->recognize(
 					fopen('./tmp/'.$data.'.flac', 'r')
 				);
