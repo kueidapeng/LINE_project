@@ -35,6 +35,13 @@
 					}
 
 				}
+
+				if (isset($data["map_cat_name"])) {
+ 
+					$Text= $data["map_cat_name"];
+					include('event/message_event/bot_category.php');
+
+				}				
 			}
 			
 ?>			

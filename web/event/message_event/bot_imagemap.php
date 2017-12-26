@@ -1,5 +1,6 @@
 ﻿ <?php
 
+			$redis->updateUserStatus($user_id,'');
 			$columns = array();
 			$baseUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/menu.png?_ignore=';
 			//error_log('1.$baseUrl: '.$baseUrl);

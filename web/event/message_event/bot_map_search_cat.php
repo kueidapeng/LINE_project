@@ -28,9 +28,9 @@
 				$columns = array();
 				foreach($contents as $content){
 
-					$actions = new \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder(emoji('2B50').$content->name,'類別：'.$content->name);
-							
-							$column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ImageCarouselColumnTemplateBuilder('https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/'.$content->category_code.'.png', $actions);
+					$actions = new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder(emoji('2B50').$content->name,'map_cat_name='.$content->name);
+
+							$column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ImageCarouselColumnTemplateBuilder($content->img_url, $actions);
 							$columns[] = $column;
 			
 					
