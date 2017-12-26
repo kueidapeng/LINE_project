@@ -4,8 +4,12 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "hash": "00d9c4a125f2fc939ce92704e47857b3",
     "content-hash": "e624829699040bbe34c355dc73e10e02",
+=======
+    "content-hash": "ffe89fa14ced64d3256243b0b4c5167a",
+>>>>>>> 9f644dd2743ea60d6b0109fca42a68f854ab4d65
     "packages": [
         {
             "name": "alchemy/binary-driver",
@@ -62,7 +66,11 @@
                 "binary",
                 "driver"
             ],
+<<<<<<< HEAD
             "time": "2016-03-02 13:49:15"
+=======
+            "time": "2016-03-02T13:49:15+00:00"
+>>>>>>> 9f644dd2743ea60d6b0109fca42a68f854ab4d65
         },
         {
             "name": "doctrine/cache",
@@ -136,7 +144,11 @@
                 "cache",
                 "caching"
             ],
+<<<<<<< HEAD
             "time": "2017-08-25 07:02:50"
+=======
+            "time": "2017-08-25T07:02:50+00:00"
+>>>>>>> 9f644dd2743ea60d6b0109fca42a68f854ab4d65
         },
         {
             "name": "evenement/evenement",
@@ -184,6 +196,7 @@
                 "event-dispatcher",
                 "event-emitter"
             ],
+<<<<<<< HEAD
             "time": "2017-07-17 17:39:19"
         },
         {
@@ -717,6 +730,9 @@
                 "url"
             ],
             "time": "2017-03-20 17:10:46"
+=======
+            "time": "2017-07-17T17:39:19+00:00"
+>>>>>>> 9f644dd2743ea60d6b0109fca42a68f854ab4d65
         },
         {
             "name": "monolog/monolog",
@@ -794,7 +810,11 @@
                 "logging",
                 "psr-3"
             ],
+<<<<<<< HEAD
             "time": "2017-06-19 01:22:40"
+=======
+            "time": "2017-06-19T01:22:40+00:00"
+>>>>>>> 9f644dd2743ea60d6b0109fca42a68f854ab4d65
         },
         {
             "name": "neutron/temporary-filesystem",
@@ -834,7 +854,11 @@
                 }
             ],
             "description": "Symfony filesystem extension to handle temporary files",
+<<<<<<< HEAD
             "time": "2016-03-05 10:22:50"
+=======
+            "time": "2016-03-05T10:22:50+00:00"
+>>>>>>> 9f644dd2743ea60d6b0109fca42a68f854ab4d65
         },
         {
             "name": "php-ffmpeg/php-ffmpeg",
@@ -918,7 +942,11 @@
                 "video",
                 "video processing"
             ],
+<<<<<<< HEAD
             "time": "2017-11-08 17:05:52"
+=======
+            "time": "2017-11-08T17:05:52+00:00"
+>>>>>>> 9f644dd2743ea60d6b0109fca42a68f854ab4d65
         },
         {
             "name": "predis/predis",
@@ -1254,6 +1282,151 @@
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
             "time": "2017-12-14 19:40:10"
+        },
+        {
+            "name": "psr/log",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "homepage": "https://github.com/php-fig/log",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "time": "2016-10-10T12:19:37+00:00"
+        },
+        {
+            "name": "symfony/filesystem",
+            "version": "v3.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/filesystem.git",
+                "reference": "25b135bea251829e3db6a77d773643408b575ed4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/25b135bea251829e3db6a77d773643408b575ed4",
+                "reference": "25b135bea251829e3db6a77d773643408b575ed4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5.9|>=7.0.8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Filesystem\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Filesystem Component",
+            "homepage": "https://symfony.com",
+            "time": "2017-12-14T19:40:10+00:00"
+        },
+        {
+            "name": "symfony/process",
+            "version": "v3.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/process.git",
+                "reference": "bb3ef65d493a6d57297cad6c560ee04e2a8f5098"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/process/zipball/bb3ef65d493a6d57297cad6c560ee04e2a8f5098",
+                "reference": "bb3ef65d493a6d57297cad6c560ee04e2a8f5098",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5.9|>=7.0.8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Process\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Process Component",
+            "homepage": "https://symfony.com",
+            "time": "2017-12-14T19:40:10+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

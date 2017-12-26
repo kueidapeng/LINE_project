@@ -7,8 +7,12 @@
 			"vlucas/phpdotenv": "^2.4",
 			"ext-mbstring": "*",
 		  "predis/predis": "^1.1",
+<<<<<<< HEAD
 		"php-ffmpeg/php-ffmpeg": "^0.11.0",
 		"google/cloud-speech": "^0.10.1"
+=======
+		"php-ffmpeg/php-ffmpeg": "^0.11.0"
+>>>>>>> 9f644dd2743ea60d6b0109fca42a68f854ab4d65
 	  },
 	    "autoload": {
 			"psr-4": {

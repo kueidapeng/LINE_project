@@ -1,5 +1,6 @@
 <?php 
 require_once '../vendor/autoload.php';
+<<<<<<< HEAD
 use Google\Cloud\Speech\SpeechClient;
   
  
@@ -9,6 +10,27 @@ use Google\Cloud\Speech\SpeechClient;
 	}
  
  
+=======
+
+if (file_exists(__DIR__.'/.env')){
+	$dotenv = new Dotenv\Dotenv(__DIR__);	
+	$dotenv->load();
+}
+
+$ffmpeg = \FFMpeg\FFMpeg::create(array(
+    'ffmpeg.binaries'  => getenv('ffmpeg_path'),
+    'ffprobe.binaries' => getenv('ffprobe_path'),
+));
+$audio = $ffmpeg->open('voice3.aac');
+
+$format = new FFMpeg\Format\Audio\Flac();
+$format->on('progress', function ($audio, $format, $percentage) {
+    echo "$percentage % transcoded";
+});
+$format->setAudioChannels(1);
+$audio->save($format, 'voice3.flac');
+
+>>>>>>> 9f644dd2743ea60d6b0109fca42a68f854ab4d65
  	$bot = new LINE\LINEBot(
   		new LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('curlHTTPClient')),
   		['channelSecret' => getenv('channelSecret')]
