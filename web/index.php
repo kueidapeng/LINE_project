@@ -67,6 +67,11 @@ use Google\Cloud\Speech\SpeechClient;
 
 			$array = [
 				"安安" => "bot_event1",
+				"好" => "bot_greeting",
+				"你好" => "bot_greeting",
+				"您好" => "bot_greeting",
+				"欸" => "bot_ask",
+				"ㄟ" => "bot_ask",
 				"座標優惠搜尋" => "bot_map_search",
 				"類別搜尋" => "bot_map_search_cat",
 				"關鍵字搜尋" => "bot_map_search_key",
