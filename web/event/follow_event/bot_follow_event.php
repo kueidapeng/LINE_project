@@ -15,15 +15,14 @@
  
 			$MultiMessageBuilder = new LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 
-			$Text = $displayName."你好".emoji('10002D')."\r\n感謝您加入卡好用帳號，卡好用幫你整理銀行和商家合作的信用卡優惠，讓你將消費省下的小錢，漸漸累積成一筆小財富！。"
-					.emoji('100080')."\r\n\r\n".emoji('10003D')."卡好用APP\r\n".emoji('100084')."iOS - bit.ly/FBabout_iOS\r\n".emoji('100084')."Android - bit.ly/FBabout_Android\r\n";
- 
+			$Text = $displayName." 您好".emoji('100003')."\r\n感謝您加入卡好用Chat Bot，卡好用幫你整理銀行和商家合作的信用卡優惠，讓你將消費省下的小錢，漸漸累積成一筆小財富！".emoji('1F4B0')."。\r\n\r\n"
+					.emoji('1F4F1')."卡好用APP\r\n".emoji('2B50')." iOS- bit.ly/FBabout_iOS\r\n".emoji('2B50')." Android- bit.ly/FBabout_Android\r\n";
 		    $columns = array();
 			$baseUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/menu.png?_ignore=';
 			//error_log('1.$baseUrl: '.$baseUrl);
 			//error_log('2.$profile: '.$profile);
 
-			$altText="卡好用menu";
+			$altText="卡好用LINE服務";
 			
 			$baseSizeBuilder = new LINE\LINEBot\MessageBuilder\Imagemap\BaseSizeBuilder(1040,1040);
 			$areaBuilderLT = new LINE\LINEBot\ImagemapActionBuilder\AreaBuilder(17,215,500,400); 	//LT block
@@ -46,7 +45,7 @@
  
 			$MultiMessageBuilder->add(new LINE\LINEBot\MessageBuilder\TextMessageBuilder($Text));
 			$MultiMessageBuilder->add(new LINE\LINEBot\MessageBuilder\ImagemapMessageBuilder($baseUrl,$altText,$baseSizeBuilder,$columns));
-			$MultiMessageBuilder->add(new LINE\LINEBot\MessageBuilder\VideoMessageBuilder($originalContentUrl,$previewImageUrl));
+			//$MultiMessageBuilder->add(new LINE\LINEBot\MessageBuilder\VideoMessageBuilder($originalContentUrl,$previewImageUrl));
 			 
 			$bot->replyMessage($reply_token, $MultiMessageBuilder);
 			

@@ -14,7 +14,7 @@
  
 
 		$latlng=$redis->getLocation($user_id);
-		$address = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?latlng=".$latlng."&sensor=false&key=AIzaSyCX03bCD5_W0XcW57qxaHsnvw_pDTCLCUQ"),true);
+		$address = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?latlng=".$latlng."&sensor=false"),true);
 
 					for($i=0;$i<count($address['results'][0]['address_components']);$i++){
 						if($address['results'][0]['address_components'][$i]['types'][0]=='postal_code'){
@@ -44,6 +44,7 @@
 						
 						$web_url="https://www.cardhoin.com/brand/".$content->id."/activity/".$content->activity->id;
 						$map_url="https://www.google.com.tw/maps/dir/".$content->branch->lat.','.$content->branch->lng."/".$latlng;
+						
 						$share =emoji('100005')."推薦給您一則優惠訊息".emoji('100005')."\r\n\r\n"
 								.emoji('1F449')." ".$content->name."\r\n"
 								.emoji('1F4B3')." ".$content->activity->name." ➤ ".$content->branch->name."\r\n"								
@@ -79,7 +80,7 @@
 						new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("否", "map_cat=N")
 					  );
 					$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder("是否要選擇其他類別？", $actions);
-					$msg2 = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要用手機的賴才看的到哦", $button);
+					$msg2 = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要在手機上才能看唷", $button);
 										
 
 					$MultiMessageBuilder->add($msg2);

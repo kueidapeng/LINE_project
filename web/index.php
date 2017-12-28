@@ -1,7 +1,7 @@
 <?php 
 require_once '../vendor/autoload.php';
 use Google\Cloud\Speech\SpeechClient;
-  
+ 
  
  	if (file_exists(__DIR__.'/.env')){
 		$dotenv = new Dotenv\Dotenv(__DIR__);	
@@ -67,11 +67,11 @@ use Google\Cloud\Speech\SpeechClient;
 			}
 
 			$array = [
-				"安安" => "bot_event1",
 				"座標優惠搜尋" => "bot_map_search",
 				"類別搜尋" => "bot_map_search_cat",
 				"關鍵字搜尋" => "bot_map_search_key",
 				"卡好用服務" => "bot_imagemap",
+				"卡好用APP下載" => "bot_app_download",
 				//preg_match ("/\類別：/i", $getText) == 1 ? $getText : "" => "bot_category",
 				preg_match ("/\關鍵字：/i", $getText) == 1 ? $getText : "" => "bot_keyword",
 			];			
@@ -107,47 +107,7 @@ use Google\Cloud\Speech\SpeechClient;
 			$contentId = $event->getMessageId();
 			$audio = $bot->getMessageContent($contentId)->getRawBody();
 		 
-			$data=date('Y-h-m-h-i-s');
-			$soundfile =  file_put_contents('./file/'.$data.'.jpg', $audio);
-			$image="http://355d5995.ngrok.io/line_bot/file/".$data.".jpg";
-//$image="https://samples.clarifai.com/metro-north.jpg"
-
-			$post_data = [
-				"inputs" => [
-				  [		
-					  "data" =>
-				  [
-					"image" => 
-					["url" => $image,]
-			 
-				  ]
-				  ]
-				]
-			  ]; 
-			
-			
-			$ch = curl_init("https://api.clarifai.com/v2/models/aaa03c23b3724a16a56b629203edc62c/outputs");
-			curl_setopt($ch, CURLOPT_POST, true);
-			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
-			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-				'Content-Type: application/json',
-				'Authorization: Key '."d0c7cb9e47f44f558eb01060b99cb752"
-				//'Authorization: Bearer '. TOKEN
-			));
-			$result = curl_exec($ch);
-			$json = json_decode($result, true);
-			$message="在這圖片裡面有:\n\t";
-			for($i=0;$i<count($json['outputs'][0]['data']['concepts']);$i++){
-				 
-				$message=$message.$json['outputs'][0]['data']['concepts'][$i]['name']." 可能:".$json['outputs'][0]['data']['concepts'][$i]['value']."%\n\t";
-			}	
-
-			$reply_token = $event->getReplyToken();
-			$bot->replyText($reply_token, $message);
+ 
 
 		}
 
@@ -158,7 +118,7 @@ use Google\Cloud\Speech\SpeechClient;
 				  $data=date('Y-h-m-h-i-s');
 				  $soundfile =  file_put_contents('./tmp/'.$data.'.aac', $audio);
 
-				  $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("正在分析語音請稍後..."); //文字
+				  $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder(emoji('10002F')."正在分析語音請稍後..."); //文字
 				  $response = $bot->pushMessage($user_id, $textMessageBuilder); //message push	
 
 				  $ffmpeg = \FFMpeg\FFMpeg::create(array(
@@ -200,11 +160,14 @@ use Google\Cloud\Speech\SpeechClient;
 				$results = $speech->recognize(
 					fopen('./tmp/'.$data.'.flac', 'r')
 				);
-				 $aaa="";
-				foreach ($results as $result) {
- 
-					$reply_token = $event->getReplyToken();
-					$bot->replyText($reply_token, $result->topAlternative()['transcript']);
+				if(!empty($results)){
+					foreach ($results as $result) {
+	
+						$getText=$result->topAlternative()['transcript'];
+						include('event/message_event/bot_keyword.php');	
+					}
+				}else{
+					$bot->replyText($reply_token, emoji('10008E')."很抱歉，沒辦法分析您的語音。");
 				}
 
 				//Delete file
@@ -235,6 +198,28 @@ use Google\Cloud\Speech\SpeechClient;
 		// close curl resource to free up system resources
 		curl_close($ch);
 	  return  json_decode($output)->result->fulfillment->speech;
+   }
+
+   function make_bitly_url($url,$login,$appkey,$format = 'xml',$version = '2.0.1')
+   {
+	   //create the URL
+	   $bitly = 'http://api.bit.ly/shorten?version='.$version.'&longUrl='.urlencode($url).'&login='.$login.'&apiKey='.$appkey.'&format='.$format;
+	   
+	   //get the url
+	   //could also use cURL here
+	   $response = file_get_contents($bitly);
+	   
+	   //parse depending on desired format
+	   if(strtolower($format) == 'json')
+	   {
+		   $json = @json_decode($response,true);
+		   return $json['results'][$url]['shortUrl'];
+	   }
+	   else //xml
+	   {
+		   $xml = simplexml_load_string($response);
+		   return 'http://bit.ly/'.$xml->results->nodeKeyVal->hash;
+	   }
    }
 
  

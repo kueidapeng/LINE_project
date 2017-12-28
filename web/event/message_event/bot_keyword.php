@@ -4,8 +4,11 @@
 		$redis->updateUserStatus($user_id,'');
 		$Text=str_replace("關鍵字：", '', $getText);
  
+		$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("尋找關鍵字：".$Text); //文字
+		$response = $bot->pushMessage($user_id, $textMessageBuilder); //message push
+ 
 		$latlng=$redis->getLocation($user_id);
-		$address = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?latlng=".$latlng."&sensor=false&key=AIzaSyCX03bCD5_W0XcW57qxaHsnvw_pDTCLCUQ"),true);
+		$address = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?latlng=".$latlng."&sensor=false"),true);
 
 					for($i=0;$i<count($address['results'][0]['address_components']);$i++){
 						if($address['results'][0]['address_components'][$i]['types'][0]=='postal_code'){
