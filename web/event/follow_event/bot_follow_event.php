@@ -15,22 +15,7 @@
  
 			$MultiMessageBuilder = new LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 
-			$pattern_angle = "/\{{(.*?)\}}/"; // remain{{}}
-			$pattern_square = "/\{{(.*)\s\w+='(.*)'\}}/"; // deal with{{...}}
-		                                                  // Tag content_og_tag
-																			
-			// Tag content
-			preg_match_all($pattern_angle, $jsonString['bot_follow_event'], $matches_angle);
-			foreach ($matches_angle[0] as $angle) {
-				preg_match_all($pattern_square, $angle, $matches);
-				if (isset($matches[0][0])) {
-					$be_replaced[] = $matches[0][0]; // save string be replace
-					$replacement[] = $UtilityHandler->{$matches[1][0]}($matches[2][0]); // save replace string
-				}
-			}
-			if (isset($be_replaced) && isset($replacement))
-			$Text = str_replace($be_replaced, $replacement, trim($jsonString['bot_follow_event']));
-		
+			$Text =$UtilityHandler->tag_translate($jsonString['bot_follow_event']);	
 			
 			$columns = array();
 			$baseUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/menu.png?_ignore=';
