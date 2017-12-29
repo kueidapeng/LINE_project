@@ -8,7 +8,8 @@
 			"ext-mbstring": "*",
 		  "predis/predis": "^1.1",
 			"php-ffmpeg/php-ffmpeg": "^0.11.0",
-			"google/cloud-speech": "^0.10.1"
+			"google/cloud-speech": "^0.10.1",
+		"salsify/json-streaming-parser": "^6.0"
 	  },
 	    "autoload": {
 			"psr-4": {
