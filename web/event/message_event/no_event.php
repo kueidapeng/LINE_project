@@ -1,8 +1,17 @@
 ﻿ 
 <?php
-			$textMessage = '􀂆 抱歉，我不知道你在說什麼，我沒辦法回答您。􀂔 ';
+$redis->updateUserStatus($user_id,'');
+			$textMessage = emoji(100086).'抱歉，我不清楚您說什麼，沒辦法回答您可利用下方的圖示點選需要的服務。'.emoji(100094);
  			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($textMessage);  
-			$response =  $bot->replyMessage($reply_token, $textMessageBuilder);
+	
+			$imagemap= new App\event\message_event\ImagemapHandler;				//create imagemap object
+			$ImageMessageBuilder=$imagemap->createImagemap();
 
+			$MultiMessageBuilder = new LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
+	
+			$MultiMessageBuilder->add($textMessageBuilder);
+			$MultiMessageBuilder->add($ImageMessageBuilder);
+
+			$response =  $bot->replyMessage($reply_token, $MultiMessageBuilder);
 ?>
  

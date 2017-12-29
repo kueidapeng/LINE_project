@@ -22,7 +22,6 @@ use Google\Cloud\Speech\SpeechClient;
 
     $events = $bot->parseEventRequest($body, $signature);
 	
-
     foreach ($events as $event){
 	
 		$reply_token = $event->getReplyToken();
@@ -67,6 +66,12 @@ use Google\Cloud\Speech\SpeechClient;
 			}
 
 			$array = [
+				"安安" => "bot_event1",
+				"好" => "bot_greeting",
+				"你好" => "bot_greeting",
+				"您好" => "bot_greeting",
+				"欸" => "bot_ask",
+				"ㄟ" => "bot_ask",
 				"座標優惠搜尋" => "bot_map_search",
 				"類別搜尋" => "bot_map_search_cat",
 				"關鍵字搜尋" => "bot_map_search_key",
@@ -139,7 +144,7 @@ use Google\Cloud\Speech\SpeechClient;
 					"type"=> getenv('type'),
 					"project_id"=> getenv('project_id'),
 					"private_key_id"=> getenv('private_key_id'),
-					"private_key"=> "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDN7bRSIFzf5gdk\n749Hg4/qz6lIPdvihtD08QLqKicYod7q4FPPar3Ly0bV3Ydip5wIWyIZz/Mx4ifp\n/I/ga1v/bQhtCaLUHSrn/panO9yRkeIZd5YCS2wBssuGIzWackAmQHTwjhmN3ylF\nY4HbPy9nJ1SbUBM+xrW4tDzFo/2h+shXKsxEYBV0w7kIP7T9bV6Vh2V1x+6ygTdo\noJsX1xRYAvCM0sj12YHRCCajpHDqdZx97E4Byeh28oxa5gbqkbZ2z/Vl9CjxNq1a\nas5IDWiZ/bReMUddE6mdEplGNR40ySvY8ZInpYOEKBDTKlEN+tJUSsV80bjgF5FO\nyPGcaLTPAgMBAAECggEAEozAiwtWQmb2sI1x0yfTPXwiTBsiZQfu57mUISLV7b6b\nFX5KnmsHmMWBZn9zlBv0Dr6i1j9osUwle0rgbP9OxLX+JdBR5hiQhmBlEsBuMIC7\nJL8keKVxn7+K3NTsHbL/+1IgFpE+VQzOq2z4xBavfvPIh8sRSLzenrpBpS4OCVqj\n0yrBEj8D7rt9xWamSCAD0wFFnwaWXHxZkMhFKcmpjETWGdj2rxarwGEAAwA67e06\ndCtgnJYrTcCEU2d4gNlwo3BZFV/5I3wlh8XvojMk0Y93FFvjd9SqPI3L9TofUSsX\nnB2paW2mXEnXKJZDtxk3t4te0Ze1359c60zBtPho6QKBgQD5N4bZcl55PbL1T1zz\nq8M+ZUXKBGfIHOYgb4BD6gyYmb+ogIQc1v2rn72csOrK71FWE2JGo26yuZyqUJq8\nGQ9XKAf92307mWMxD+CGBrdQISFohe/nHcFTZMxoKuXU8IqE4ktm6oH+y/GG0Q5v\ngPFvKqz+3gUZG9fo92hierFuVwKBgQDTiI5zhmWv05z7cyNWi28yNJapEWba+dUy\nBtCYp/oVJY+mucLM0JfDERql3+UJhDsAxyD9HVHTi4SVLkYBf1vB0IbxBs8FTbW8\nsLqosOv7mry+KQAvfyBKrOwUqKbLBWR0Ibg1CQMtj3a4Y6jo4ql5VPoEam+WfnGi\nBlf+kU7ySQKBgE2b7iGfTS5ieW2NVnwHnFi8/vvHXW5jGYM2VfJQW7XWA2p9Aydc\nCEk/CLRYH/Ysit7MUImA8cM0rEYZreYvw6g3ri1vAdPik5I+yIPUaZfJiXbcZvZJ\nPOA0frddzI8AjZKOSj71fqATcNa0GdO9ivI8jv0btOi51AYXreklHkYnAoGAOKBt\nwe9QeWkktQt1gk2BTudVDZ1i82u97s50OOl+wPp1IiTISRvuBIInqA/vuER1pxen\ndRrMNN08eNMSWoRFg/TWqt8vvDO5WvHUhiQWiBw8OouvSQe3FUaFTGJ5hA/FfHEq\nZsgq2Z92IJZNOUq0I47j/xqfFKJ0uPMJy1QK1kECgYEAj0i+p7d6Sv82ODTawEMQ\nJ5DT6cwhawzcnOCbpWscpjC3XDZScUf6tJZadmDPan6LnaMukzteEb7s+KvfSiz5\neEF4o9ka/p90NKjhCyxCSHBoNb7/1Fg4//7iSlM7Dd/laJePcUctHMIUJ0V85vAR\nUFrXriiqIa2ACJ2mj0KG0UE=\n-----END PRIVATE KEY-----\n",
+					"private_key"=> str_replace('|', "\n",getenv('private_key')),
 					"client_email"=> getenv('client_email'),
 					"client_id"=> getenv('client_id'),	
 					"auth_uri"=> getenv('auth_uri'),
