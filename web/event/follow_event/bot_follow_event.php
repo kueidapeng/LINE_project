@@ -2,7 +2,9 @@
 			/*
 			follow event
 			*/
-			
+			$UtilityHandler= new App\event\UtilityHandler;				//create UtilityHandler object
+			$jsonString=$UtilityHandler->getJsonString();				//get json string from description
+
 			$user_ID=$event->getUserId();
 			$redis->addUserId($user_ID); //add user_id to redis row
 			
@@ -13,9 +15,24 @@
  
 			$MultiMessageBuilder = new LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 
-			$Text = $displayName." 您好".emoji('100003')."\r\n感謝您加入卡好用Chat Bot，卡好用幫你整理銀行和商家合作的信用卡優惠，讓你將消費省下的小錢，漸漸累積成一筆小財富！".emoji('1F4B0')."。\r\n\r\n"
-					.emoji('1F4F1')."卡好用APP\r\n".emoji('2B50')." iOS- bit.ly/FBabout_iOS\r\n".emoji('2B50')." Android- bit.ly/FBabout_Android\r\n";
-		    $columns = array();
+			$pattern_angle = "/\{{(.*?)\}}/"; // remain{{}}
+			$pattern_square = "/\{{(.*)\s\w+='(.*)'\}}/"; // deal with{{...}}
+		                                                  // Tag content_og_tag
+																			
+			// Tag content
+			preg_match_all($pattern_angle, $jsonString['bot_follow_event'], $matches_angle);
+			foreach ($matches_angle[0] as $angle) {
+				preg_match_all($pattern_square, $angle, $matches);
+				if (isset($matches[0][0])) {
+					$be_replaced[] = $matches[0][0]; // save string be replace
+					$replacement[] = $UtilityHandler->{$matches[1][0]}($matches[2][0]); // save replace string
+				}
+			}
+			if (isset($be_replaced) && isset($replacement))
+			$Text = str_replace($be_replaced, $replacement, trim($jsonString['bot_follow_event']));
+		
+			
+			$columns = array();
 			$baseUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/menu.png?_ignore=';
 			//error_log('1.$baseUrl: '.$baseUrl);
 			//error_log('2.$profile: '.$profile);
@@ -42,5 +59,5 @@
 			$MultiMessageBuilder->add(new LINE\LINEBot\MessageBuilder\ImagemapMessageBuilder($baseUrl,$altText,$baseSizeBuilder,$columns));
 
 			$bot->replyMessage($reply_token, $MultiMessageBuilder);
-			
+			 
 ?>			
