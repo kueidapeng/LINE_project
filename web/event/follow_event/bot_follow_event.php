@@ -7,6 +7,7 @@
 
 			$user_ID=$event->getUserId();
 			$redis->addUserId($user_ID); //add user_id to redis row
+			$redis->updateUserStatus($user_id,'');
 			
 			//call get profile
 			$response = $bot->getProfile($user_ID);

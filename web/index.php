@@ -66,7 +66,6 @@ use Google\Cloud\Speech\SpeechClient;
 			}
 
 			$array = [
-				"安安" => "bot_event1",
 				"好" => "bot_greeting",
 				"你好" => "bot_greeting",
 				"您好" => "bot_greeting",

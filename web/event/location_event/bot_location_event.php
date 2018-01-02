@@ -2,7 +2,7 @@
 			/*
 			location event
 			*/
-
+			$thumbnailImageUrl=null;
 			//$thumbnailImageUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/location_search.png?_ignore=';			
 
 			if($redis->checkLocation($user_id)==0){ // location add

@@ -1,6 +1,6 @@
 <?php
  
- 
+ 	$thumbnailImageUrl=null;
 	 if($redis->checkUserId($user_id)==0){  //no user_id
 
 		$redis->updateUserStatus($user_id,'no_user_id');
