@@ -47,7 +47,7 @@
 						$map_url="https://www.google.com.tw/maps/dir/".$content->branch->lat.','.$content->branch->lng."/".$latlng;
 						$loca_url="https://maps.google.com/?q=".$content->branch->lat.','.$content->branch->lng;
 						
-						$share =emoji('100005')."推薦你一個超棒的信用卡優惠".emoji('100005')."\r\n\r\n"
+						$share =emoji('100005')."推薦你一個信用卡優惠".emoji('100005')."\r\n\r\n"
 								.emoji('1F449')." ".$content->name."\r\n"
 								.emoji('1F4B3')." ".$content->activity->name." ➤ ".$content->branch->name."\r\n"								
 							    ."⌜".$content->activity->title."⌟！【卡好用APP】幫你挑出最棒的信用卡優惠。"."\r\n\r\n"								
