@@ -2,7 +2,7 @@
 
 			$redis->updateUserStatus($user_id,'');
 			$columns = array();
-			$baseUrl='https://'. $_SERVER['HTTP_HOST'].'/line_bot/image/line_menu.png?_ignore=';
+			$baseUrl='https://'. $_SERVER['HTTP_HOST'].getenv('image_path').'line_menu.png?_ignore=';
 			//error_log('1.$baseUrl: '.$baseUrl);
 			//error_log('2.$profile: '.$profile);
 

@@ -9,8 +9,8 @@ class ImagemapHandler {
 
 	public function createImagemap() {
         $columns = array();
-        $baseUrl='https://'. $_SERVER['HTTP_HOST'].getenv('imagemap_path');
-        $altText="卡好用menu";
+        $baseUrl='https://'. $_SERVER['HTTP_HOST'].getenv('image_path').'line_menu.png?_ignore=';
+        $altText="卡好用LINE服務";
         
         $baseSizeBuilder = new BaseSizeBuilder(1040,1040);
         $areaBuilderLT = new AreaBuilder(17,215,500,400); 	//LT block
