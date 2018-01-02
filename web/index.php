@@ -96,24 +96,16 @@ use Google\Cloud\Speech\SpeechClient;
 
 		//location event 		
 		if ($event instanceof \LINE\LINEBot\Event\MessageEvent\LocationMessage) {
-
 			include('event/location_event/bot_location_event.php');
-
 		}
 		
 		if ($event instanceof \LINE\LINEBot\Event\PostbackEvent) {
-
 			include('event/postback_event/bot_postback_event.php');			
-
-
 		}
 		
 		if ($event instanceof \LINE\LINEBot\Event\MessageEvent\ImageMessage) {
 			$contentId = $event->getMessageId();
 			$audio = $bot->getMessageContent($contentId)->getRawBody();
-		 
- 
-
 		}
 
 	 if ($event instanceof \LINE\LINEBot\Event\MessageEvent\AudioMessage) {
@@ -139,7 +131,9 @@ use Google\Cloud\Speech\SpeechClient;
 				});
 				$format->setAudioChannels(1);
 				$audio->save($format, './tmp/'.$data.'.flac');
- 
+			
+				if(file_exists('./tmp/'.$data.'.flac')){
+
 				$speech_json=[
 					"type"=> getenv('type'),
 					"project_id"=> getenv('project_id'),
@@ -161,27 +155,25 @@ use Google\Cloud\Speech\SpeechClient;
 				]);
 				
 				// Recognize the speech in an audio file.
-
 				$results = $speech->recognize(
 					fopen('./tmp/'.$data.'.flac', 'r')
 				);
 				if(!empty($results)){
 					foreach ($results as $result) {
-	
 						$getText=$result->topAlternative()['transcript'];
 						include('event/message_event/bot_keyword.php');	
 					}
 				}else{
 					$bot->replyText($reply_token, emoji('10008E')."很抱歉，沒辦法分析您的語音。");
 				}
-
 				//Delete file
 				unlink('./tmp/'.$data.'.aac');
 				unlink('./tmp/'.$data.'.flac');
-				 
+			}else{
+					$bot->replyText($reply_token, emoji('10008E')."很抱歉，沒辦法分析您的語音。");
+				unlink('./tmp/'.$data.'.aac');
+			}
 		} 	
-
-	
     }
 
 	//emoji unicode
