@@ -2,7 +2,11 @@
 			/*
 			join event
 			*/
-			$text = emoji('10002D')."大家我是卡好用BOT，歡迎加入好友，提供更多服務給您，卡好用關心您。".emoji('100005');
+			$UtilityHandler= new App\event\UtilityHandler;				//create UtilityHandler object
+			$jsonString=$UtilityHandler->getJsonString();				//get json string from description
+			$text =$UtilityHandler->tag_translate($jsonString['bot_join_event']);	
+
+
 			$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text);  
 			$bot->replyMessage($reply_token, $textMessageBuilder);
 			
