@@ -22,7 +22,7 @@
 						   );
 								   
 					
-				$carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder("優惠搜尋","請先點下方選定位座標。", $thumbnailImageUrl,$actions);
+				$carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder(emoji('1F50D')." 優惠搜尋","請先點下方選定位座標。", $thumbnailImageUrl,$actions);
 				$msg = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要在手機上才能看唷", $carousel);
 
 				$MultiMessageBuilder = new LINE\LINEBot\MessageBuilder\MultiMessageBuilder();

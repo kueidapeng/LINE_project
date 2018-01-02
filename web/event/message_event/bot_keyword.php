@@ -70,11 +70,11 @@
 
 
 					$actions = array(
-						new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("是", "map_key=Y"),
-						new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("否", "map_key=N")
+						new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("繼續搜尋", "map_key=Y"),
+						new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("回LINE服務", "map_key=N")
 					  );
-					$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder("是否要在搜尋其他優惠？", $actions);
-					$msg2 = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要用手機的賴才看的到哦", $button);
+					$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder(emoji('1F4CC')." 是否要在搜尋其他優惠？", $actions);
+					$msg2 = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要在手機上才能看唷", $button);
 										
 
 					$MultiMessageBuilder->add($msg2);

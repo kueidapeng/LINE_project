@@ -78,10 +78,10 @@
  
 					
 					$actions = array(
-						new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("是", "map_cat=Y"),
-						new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("否", "map_cat=N")
+						new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("繼續搜尋", "map_cat=Y"),
+						new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("回卡好用服務", "map_cat=N")
 					  );
-					$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder("是否要選擇其他類別？", $actions);
+					$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder(emoji('1F4CC')." 是否要在搜尋其他優惠？", $actions);
 					$msg2 = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要在手機上才能看唷", $button);
 										
 

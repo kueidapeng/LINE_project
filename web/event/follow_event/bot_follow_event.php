@@ -15,7 +15,7 @@
  
 			$MultiMessageBuilder = new LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 
-			$Text =$UtilityHandler->tag_translate($jsonString['bot_follow_event']);	
+			$Text =$displayName.$UtilityHandler->tag_translate($jsonString['bot_follow_event']);	
 			
 			$columns = array();
 			$baseUrl='https://'. $_SERVER['HTTP_HOST'].getenv('image_path').'line_menu.png?_ignore=';
