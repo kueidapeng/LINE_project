@@ -35,13 +35,13 @@
 			$areaBuilderCat7 = new LINE\LINEBot\ImagemapActionBuilder\AreaBuilder(551,467,174,174);	//RD block
 			
 			$linkUri1="關鍵字搜尋";
-			$Cat1=emoji('100054')."類別：美味食光";
-			$Cat2=emoji('100072')."類別：購物優惠";
-			$Cat3=emoji('10003B')."類別：影藝娛樂";
-			$Cat4=emoji('1000B5')."類別：旅遊住宿";
-			$Cat5=emoji('100053')."類別：加油租車";
-			$Cat6=emoji('100047')."類別：交通運輸";
-			$Cat7=emoji('10003D')."類別：網路平台";
+			$Cat1="類別：美味食光";
+			$Cat2="類別：購物優惠";
+			$Cat3="類別：影藝娛樂";
+			$Cat4="類別：旅遊住宿";
+			$Cat5="類別：加油租車";
+			$Cat6="類別：交通運輸";
+			$Cat7="類別：網路平台";
  
 			$columns[] = new LINE\LINEBot\ImagemapActionBuilder\ImagemapMessageActionBuilder($linkUri1,$areaBuilderKeyword);
 			$columns[] = new LINE\LINEBot\ImagemapActionBuilder\ImagemapMessageActionBuilder($Cat1,$areaBuilderCat1);
