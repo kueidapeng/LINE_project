@@ -2,6 +2,7 @@
  
  		$MultiMessageBuilder = new LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 		$redis->updateUserStatus($user_id,'');
+		$Text=str_replace("類別：", '', $getText);
 
 		$category = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/categories?page_type=menu"),true);
 		
@@ -31,7 +32,7 @@
 					
 					if(empty($contents)){
 						
-						$text = emoji('10002D')."很抱歉，您的所在地找不到".$Text."的相關優惠。";
+						$text = emoji('100095')."很抱歉，您的所在地找不到".$Text."的相關優惠。";
 						$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text);  
  
 						$MultiMessageBuilder->add($textMessageBuilder);
@@ -44,13 +45,14 @@
 						
 						$web_url="https://www.cardhoin.com/brand/".$content->id."/activity/".$content->activity->id;
 						$map_url="https://www.google.com.tw/maps/dir/".$content->branch->lat.','.$content->branch->lng."/".$latlng;
+						$loca_url="https://maps.google.com/?q=".$content->branch->lat.','.$content->branch->lng;
 						
 						$share =emoji('100005')."推薦給您一則優惠訊息".emoji('100005')."\r\n\r\n"
 								.emoji('1F449')." ".$content->name."\r\n"
 								.emoji('1F4B3')." ".$content->activity->name." ➤ ".$content->branch->name."\r\n"								
 							    ."⌜".$content->activity->title."。⌟"."\r\n\r\n"								
 								.emoji('2728')."優惠詳情：\r\n".$web_url."\r\n"
-								.emoji('2728')."地圖導航：\r\n".$map_url."\r\n";	
+								.emoji('2728')."地點資訊：\r\n".$loca_url."\r\n";	
 						$actions = array(
 								new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder(emoji('1F449')." 優惠連結",$web_url),
 								new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder(emoji('1F695')." 地圖導航",$map_url),

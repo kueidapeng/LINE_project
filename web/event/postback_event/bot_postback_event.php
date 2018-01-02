@@ -13,7 +13,7 @@
 
 					switch ($page) {
 						case 'Y':
-						include('event/message_event/bot_map_search_key.php');
+						include('event/message_event/bot_map_search_cat.php');
 						break;
 						case 'N':
 						include('event/message_event/bot_imagemap.php');

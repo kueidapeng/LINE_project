@@ -25,7 +25,7 @@
 					
 					if(empty($contents)){
 
-						$text = emoji('10002D')."很抱歉，找不到您要的優惠。";
+						$text = emoji('100095')."很抱歉，找不到您要的優惠。";
 						$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text);  
  
 						$MultiMessageBuilder->add($textMessageBuilder);
@@ -38,6 +38,8 @@
 						
 						$web_url="https://www.cardhoin.com/brand/".$content->brand->id."/activity/".$content->activities[0]->id;
 						$map_url="https://www.google.com.tw/maps/dir/".$content->lat.','.$content->lng."/".$latlng;
+						$loca_url="https://maps.google.com/?q=".$content->lat.','.$content->lng;
+						
 						$share =emoji('100005')."推薦給您一則優惠訊息".emoji('100005')."\r\n\r\n"
 						.emoji('1F449')." ".$content->name."\r\n"
 						.emoji('1F4B3')." ".$content->activities[0]->name." ➤ ".$content->name."\r\n"								

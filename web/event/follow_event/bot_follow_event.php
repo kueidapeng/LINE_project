@@ -29,16 +29,16 @@
 			$areaBuilderRT = new LINE\LINEBot\ImagemapActionBuilder\AreaBuilder(523,210,500,400);	//RT block
 			$areaBuilderLD = new LINE\LINEBot\ImagemapActionBuilder\AreaBuilder(17,623,500,400);	//LD block
 			$areaBuilderRD = new LINE\LINEBot\ImagemapActionBuilder\AreaBuilder(523,623,500,400);	//RD block
-
-			$linkUri1="https://www.cardhoin.com/category/today?offset=10";
+			
+			$linkUri1="優惠搜尋";
 			$linkUri2="https://www.cardhoin.com/category/hot?offset=10";
 			$linkUri3="https://www.cardhoin.com/category/new?offset=10";
-			$linkUri4="座標優惠搜尋";
+			$linkUri4="https://www.cardhoin.com/category/today?offset=10";
 			
-			$columns[] = new LINE\LINEBot\ImagemapActionBuilder\ImagemapUriActionBuilder($linkUri1,$areaBuilderLT);
+			$columns[] = new LINE\LINEBot\ImagemapActionBuilder\ImagemapMessageActionBuilder($linkUri1,$areaBuilderLT);
 			$columns[] = new LINE\LINEBot\ImagemapActionBuilder\ImagemapUriActionBuilder($linkUri2,$areaBuilderRT);
 			$columns[] = new LINE\LINEBot\ImagemapActionBuilder\ImagemapUriActionBuilder($linkUri3,$areaBuilderLD);
-			$columns[] = new LINE\LINEBot\ImagemapActionBuilder\ImagemapMessageActionBuilder($linkUri4,$areaBuilderRD);
+			$columns[] = new LINE\LINEBot\ImagemapActionBuilder\ImagemapUriActionBuilder($linkUri4,$areaBuilderRD);
 
 			$MultiMessageBuilder->add(new LINE\LINEBot\MessageBuilder\TextMessageBuilder($Text));
 			$MultiMessageBuilder->add(new LINE\LINEBot\MessageBuilder\ImagemapMessageBuilder($baseUrl,$altText,$baseSizeBuilder,$columns));
