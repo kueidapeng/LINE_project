@@ -132,26 +132,35 @@ use Google\Cloud\Speech\SpeechClient;
 				$format->setAudioChannels(1);
 				$audio->save($format, './tmp/'.$data.'.flac');
 			
-				if(file_exists('./tmp/'.$data.'.flac')){
 
-				$speech_json=[
-					"type"=> getenv('type'),
-					"project_id"=> getenv('project_id'),
-					"private_key_id"=> getenv('private_key_id'),
-					"private_key"=> str_replace('|', "\n",getenv('private_key')),
-					"client_email"=> getenv('client_email'),
-					"client_id"=> getenv('client_id'),	
-					"auth_uri"=> getenv('auth_uri'),
-					"token_uri"=> getenv('token_uri'),
-					"auth_provider_x509_cert_url"=> getenv('auth_provider_x509_cert_url'),
-					"client_x509_cert_url"=> getenv('client_x509_cert_url'),
-				];
+				$time = 5; //how long in seconds do you allow your program to run/search
+				$found = false;
+				for($i=0; $i<$time; $i++){
+				 	if(file_exists('./tmp/'.$data.'.flac')){
+						$found = true;
+						break;
+					}
+					sleep(1); // if not found wait one second before continue looping
+				}
+
+				if(file_exists('./tmp/'.$data.'.flac') and $found===true){
+					$speech_json=[
+						"type"=> getenv('type'),
+						"project_id"=> getenv('project_id'),
+						"private_key_id"=> getenv('private_key_id'),
+						"private_key"=> str_replace('|', "\n",getenv('private_key')),
+						"client_email"=> getenv('client_email'),
+						"client_id"=> getenv('client_id'),	
+						"auth_uri"=> getenv('auth_uri'),
+						"token_uri"=> getenv('token_uri'),
+						"auth_provider_x509_cert_url"=> getenv('auth_provider_x509_cert_url'),
+						"client_x509_cert_url"=> getenv('client_x509_cert_url'),
+					];
 				
 				$speech = new SpeechClient([
-					'projectId' => 'speechtotext-189807',
-					 'languageCode' => 'cmn-Hant-TW',
-					'keyFile' => $speech_json
-				 
+						'projectId' => 'speechtotext-189807',
+					    'languageCode' => 'cmn-Hant-TW',
+						'keyFile' => $speech_json
 				]);
 				
 				// Recognize the speech in an audio file.
