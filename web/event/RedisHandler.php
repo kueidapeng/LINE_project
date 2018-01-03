@@ -125,5 +125,28 @@ class RedisHandler {
        return UtilityHandler::toBoolean(1);
     }
 
+    public function updateZipCode($user_id,$code)
+    {
+      if($user_id===''){
+        return UtilityHandler::toBoolean(0);
+      }
+           
+      try {
+       $this->redis->hset($user_id,'zip_code',$code);
+      } catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+      }
+     
+       return UtilityHandler::toBoolean(1);
+    }
+
+    public function getzipcode($user_id)
+    {
+      $result= UtilityHandler::toBoolean($this->redis->exists($user_id));
+      $user=$this->redis->hgetall($user_id);
+      $result=$user['zip_code'];      
+      return $result;
+    }
+
    
 }

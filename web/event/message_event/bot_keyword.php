@@ -8,13 +8,7 @@
 		$response = $bot->pushMessage($user_id, $textMessageBuilder); //message push
  
 		$latlng=$redis->getLocation($user_id);
-		$address = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?latlng=".$latlng."&sensor=false"),true);
-
-					for($i=0;$i<count($address['results'][0]['address_components']);$i++){
-						if($address['results'][0]['address_components'][$i]['types'][0]=='postal_code'){
-						$zip_code =substr($address['results'][0]['address_components'][$i]['long_name'],0,3); 
-						}
-					} 
+		$zip_code =$redis->getzipcode($user_id);
 		
 					/*$getText = $event->getTitle().$event->getAddress().$event->getLatitude().$event->getLongitude()."zip_code=".$zip_code;
 					 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($getText);  

@@ -27,7 +27,8 @@
 			
 					for($i=0;$i<count($address['results'][0]['address_components']);$i++){
 						if($address['results'][0]['address_components'][$i]['types'][0]=='postal_code'){
-						$zip_code =substr($address['results'][0]['address_components'][$i]['long_name'],0,3); 
+						$zip_code =substr($address['results'][0]['address_components'][$i]['long_name'],0,3);
+						$redis->updateZipCode($user_id,$zip_code);
 						}
 					} 
 					sleep(1);
