@@ -39,16 +39,9 @@
 		$MultiMessageBuilder = new LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 
 		$latlng=$redis->getLocation($user_id);
-		$address = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?latlng=".$latlng."&sensor=false&language=zh-TW"),true);
+		$zip_code =$redis->getzipcode($user_id);
 
 
-		for($i=0;$i<count($address['results'][0]['address_components']);$i++){
-			if($address['results'][0]['address_components'][$i]['types'][0]=='postal_code'){
-			$zip_code =substr($address['results'][0]['address_components'][$i]['long_name'],0,3); 
-			}
-		} 
-
-		https://www.cardhoin.com/apiserver/deviceapi/v1/geoes/live?zip_code=106
 		$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/geoes/live?zip_code=".$zip_code))->result->geo003->geo;
 		
 		$area_level_1=$contents->parent->value;
