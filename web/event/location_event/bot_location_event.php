@@ -30,8 +30,7 @@
 						$zip_code =substr($address['results'][0]['address_components'][$i]['long_name'],0,3); 
 						}
 					} 
-			
-					https://www.cardhoin.com/apiserver/deviceapi/v1/geoes/live?zip_code=106
+					sleep(1);
 					$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/geoes/live?zip_code=".$zip_code))->result->geo003->geo;
 					
 					$area_level_1=$contents->parent->value;
