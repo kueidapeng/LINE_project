@@ -16,14 +16,14 @@
 
 		$latlng=$redis->getLocation($user_id);
 		$zip_code =$redis->getzipcode($user_id);
-		
+		$sxxx ='';
 					/*$getText = $event->getTitle().$event->getAddress().$event->getLatitude().$event->getLongitude()."zip_code=".$zip_code;
 					 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($getText);  
 					 $bot->replyMessage($reply_token, $textMessageBuilder);*/
 					//$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/categories/today_usable/brands?latlng=".$event->getLatitude().",".$event->getLongitude()."&zip_code=".$zip_code."&_offset=0"))->result->cat00456->brands;
 
 					$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/categories_a/".$category_id."/brands/distinct?latlng=".$latlng."&zip_code=".$zip_code."&_offset=0"))->result->cat003->brands;
-					
+					$aaa ='';
 					if(empty($contents)){
 						
 						$text = emoji('100095')."很抱歉，您的所在地找不到".$Text."的相關優惠。";
@@ -44,7 +44,7 @@
 						$share =emoji('100005')."推薦你一個信用卡優惠".emoji('100005')."\r\n\r\n"
 								.emoji('1F449')." ".$content->name."\r\n"
 								.emoji('1F4B3')." ".$content->activity->name." ➤ ".$content->branch->name."\r\n"								
-							    ."⌜".$content->activity->title."⌟！【卡好用APP】幫你挑出最棒的信用卡優惠。"."\r\n\r\n"								
+							    ."⌜".$content->activity->title."⌟。"."\r\n\r\n"								
 								.emoji('2728')."優惠詳情：\r\n".$web_url."\r\n"
 								.emoji('2728')."地點資訊：\r\n".$loca_url."\r\n";	
 						$actions = array(

@@ -37,7 +37,7 @@
 						$share =emoji('100005')."推薦你一個信用卡優惠".emoji('100005')."\r\n\r\n"
 						.emoji('1F449')." ".$content->name."\r\n"
 						.emoji('1F4B3')." ".$content->activities[0]->name." ➤ ".$content->name."\r\n"								
-						."⌜".$content->activities[0]->title."⌟！【卡好用APP】幫你挑出最棒的信用卡優惠。"."\r\n\r\n"								
+						."⌜".$content->activities[0]->title."⌟。"."\r\n\r\n"								
 						.emoji('2728')."優惠詳情：\r\n".$web_url."\r\n"
 						.emoji('2728')."地圖導航：\r\n".$map_url."\r\n";	
 						
