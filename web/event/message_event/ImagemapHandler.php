@@ -18,15 +18,16 @@ class ImagemapHandler {
         $areaBuilderLD = new AreaBuilder(17,623,500,400);	//LD block
         $areaBuilderRD = new AreaBuilder(523,623,500,400);	//RD block
 
-        $linkUri1="https://www.cardhoin.com/category/today?offset=10";
+        $linkUri1="優惠搜尋";
+        $linkUri4="https://www.cardhoin.com/category/today?offset=10";
         $linkUri2="https://www.cardhoin.com/category/hot?offset=10";
         $linkUri3="https://www.cardhoin.com/category/new?offset=10";
-        $linkUri4="座標優惠搜尋";
-
-        $columns[] = new ImagemapUriActionBuilder($linkUri1,$areaBuilderLT);
+        $linkUri4="https://www.cardhoin.com/category/today?offset=10";
+      
+        $columns[] = new ImagemapMessageActionBuilder($linkUri1,$areaBuilderLT);
         $columns[] = new ImagemapUriActionBuilder($linkUri2,$areaBuilderRT);
         $columns[] = new ImagemapUriActionBuilder($linkUri3,$areaBuilderLD);
-        $columns[] = new ImagemapMessageActionBuilder($linkUri4,$areaBuilderRD);
+        $columns[] = new ImagemapUriActionBuilder($linkUri4,$areaBuilderRD);
 
         $ImageMessageBuilder = new ImagemapMessageBuilder($baseUrl,$altText,$baseSizeBuilder,$columns);  
 	 	return $ImageMessageBuilder;
