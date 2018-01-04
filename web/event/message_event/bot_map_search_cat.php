@@ -20,7 +20,7 @@
 					
 				}
 			*/
-			$baseUrl='https://'. $_SERVER['HTTP_HOST'].getenv('image_path').'cat_menu.png?_ignore=';
+			$baseUrl='https://'. $_SERVER['HTTP_HOST'].getenv('image_path').'cat_menu_hand.png?_ignore=';
  
 			$altText="卡好用類別";
  
