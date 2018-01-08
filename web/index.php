@@ -175,13 +175,13 @@ use Google\Cloud\Speech\SpeechClient;
 						include('event/message_event/bot_keyword.php');	
 					}
 				}else{
-					$bot->replyText($reply_token, emoji('10008E')."很抱歉，沒辦法分析您的語音。");
+					$bot->replyText($reply_token, emoji('10008E')."很抱歉，沒辦法分析您的語音，請重新輸入文字或錄製語音查詢您要的關鍵字。例如：星巴克");
 				}
 				//Delete file
 				unlink('./tmp/'.$data.'.aac');
 				unlink('./tmp/'.$data.'.flac');
 			}else{
-					$bot->replyText($reply_token, emoji('10008E')."很抱歉，沒辦法分析您的語音。");
+					$bot->replyText($reply_token, emoji('10008E')."很抱歉，沒辦法分析您的語音，請重新輸入文字或錄製語音查詢您要的關鍵字。例如：星巴克");
 				unlink('./tmp/'.$data.'.aac');
 			}
 		} 	
