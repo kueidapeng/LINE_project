@@ -56,7 +56,7 @@
 					}
 		 
 					$carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
-					$msg = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要在手機上才能看唷", $carousel);
+					$msg = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder(emoji('1F50D')."這訊息要在手機上才能看唷", $carousel);
  
 					$MultiMessageBuilder->add($msg);
  
@@ -68,7 +68,7 @@
 						new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("回LINE服務", "map_key=N")
 					  );
 					$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder(emoji('1F4CC')." 是否要在搜尋其他優惠？", $actions);
-					$msg2 = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder("這訊息要在手機上才能看唷", $button);
+					$msg2 = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder(emoji('1F50D')."這訊息要在手機上才能看唷", $button);
 										
 
 					$MultiMessageBuilder->add($msg2);
