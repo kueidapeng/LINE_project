@@ -41,7 +41,7 @@
 			$Cat4="類別：旅遊住宿";
 			$Cat5="類別：加油租車";
 			$Cat6="類別：交通運輸";
-			$Cat7="類別：網路平台";
+			$Cat7="類別：網購訂票";
  
 			$columns[] = new LINE\LINEBot\ImagemapActionBuilder\ImagemapMessageActionBuilder($linkUri1,$areaBuilderKeyword);
 			$columns[] = new LINE\LINEBot\ImagemapActionBuilder\ImagemapMessageActionBuilder($Cat1,$areaBuilderCat1);
