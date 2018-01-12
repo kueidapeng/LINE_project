@@ -69,6 +69,7 @@ use Google\Cloud\Speech\SpeechClient;
 				"您好" => "bot_greeting",
 				"欸" => "bot_ask",
 				"ㄟ" => "bot_ask",
+				"資訊查詢"=>"bot_information_event",
 				"關鍵字搜尋" => "bot_map_search_key",
 				"卡好用APP下載" => "bot_app_download",
 				preg_match ("/\類別：/i", $getText) == 1 ? $getText : "" => "bot_category",
@@ -189,7 +190,7 @@ use Google\Cloud\Speech\SpeechClient;
 	function find_synonym($getText){
 		$ch = curl_init();
 		// set url
-		curl_setopt($ch, CURLOPT_URL, "https://api.dialogflow.com/v1/query?v=20170712&query='.$getText.'&lang=en&sessionId=" .trim(getenv('sessionID')));
+		curl_setopt($ch, CURLOPT_URL, "https://api.dialogflow.com/v1/query?v=20170712&query='$getText'&lang=en&sessionId=" .trim(getenv('sessionID')));
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Authorization: Bearer '.trim(getenv('CLIENT_ACCESS_TOKEN'))));
 		//return the transfer as a string
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
