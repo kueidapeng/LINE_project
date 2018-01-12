@@ -2,5 +2,5 @@
 		"bot_follow_event": "您好{{emoji code='100003'}}\r\n感謝您加入卡好用Chat Bot，卡好用幫你整理銀行和商家合作的信用卡優惠，讓你將消費省下的小錢，漸漸累積成一筆小財富！{{emoji code='1F4B0'}}。\r\n\r\n{{emoji code='1F4F2'}} 卡好用APP\r\n {{emoji code='2728'}} iOS- bit.ly/FBabout_iOS\r\n {{emoji code='2728'}} Android- bit.ly/FBabout_Android\r\n",
 		"bot_join_event": "{{emoji code='10002D'}}大家我是卡好用BOT，歡迎加入好友，提供更多服務給您，卡好用關心您。{{emoji code='100005'}}",
 		"bot_postback_event_continue_search": "繼續搜尋",
-		"bot_postback_event_cardhoin_service": "回卡好用服務"
+		"bot_postback_event_cardhoin_service": "回列表"
 }
