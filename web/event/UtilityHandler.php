@@ -1,5 +1,10 @@
 <?php
 namespace App\event;
+use LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
+use LINE\LINEBot\MessageBuilder\MultiMessageBuilder;
+use LINE\LINEBot\MessageBuilder\TextMessageBuilde;
 
 class UtilityHandler {
 
@@ -43,5 +48,11 @@ class UtilityHandler {
 		$Text = str_replace($be_replaced, $replacement, trim($ori_string));
 	   return $Text;
 	}
-
+	public function askAddLocation(){
+		$thumbnailImageUrl=null;
+		$actions = array(   new UriTemplateActionBuilder(emoji('1F4CD')." 定位座標", "line://nv/location")  );
+		$carousel = new ButtonTemplateBuilder(emoji('1F50D')." 優惠搜尋","請先點下方選定位座標。", $thumbnailImageUrl,$actions);
+		$TemplateMessageBuilder = new TemplateMessageBuilder(emoji('1F50D')."這訊息要在手機上才能看唷", $carousel);
+		return $TemplateMessageBuilder;
+	}
 }
