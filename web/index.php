@@ -29,26 +29,19 @@ use Google\Cloud\Speech\SpeechClient;
 
 		//follow event 
         if ($event instanceof \LINE\LINEBot\Event\FollowEvent) { 
-
 			include('event/follow_event/bot_follow_event.php');
-
 		}
 		
 		//follow event 
         if ($event instanceof \LINE\LINEBot\Event\UnfollowEvent) { 
-	 
-			include('event/follow_event/bot_unfollow_event.php');
-			
+			include('event/follow_event/bot_unfollow_event.php');		
 		}
 
 		
 		//join group event
         if ($event instanceof \LINE\LINEBot\Event\JoinEvent) { 
-
 			include('event/join_event/bot_join_event.php');			
-
- 
-        }
+		}
  
 		//text event 
         if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) {
@@ -71,13 +64,7 @@ use Google\Cloud\Speech\SpeechClient;
 				"您好" => "bot_greeting",
 				"欸" => "bot_ask",
 				"ㄟ" => "bot_ask",
-				"優惠搜尋" => "bot_map_search",
-				"熱門優惠" => "bot_url",
-				"最新上架" => "bot_url",
-				"本日優惠" => "bot_url",								
-				"類別搜尋" => "bot_map_search_cat",
 				"關鍵字搜尋" => "bot_map_search_key",
-				"卡好用服務" => "bot_imagemap",
 				"卡好用APP下載" => "bot_app_download",
 				preg_match ("/\類別：/i", $getText) == 1 ? $getText : "" => "bot_category",
 				preg_match ("/\關鍵字：/i", $getText) == 1 ? $getText : "" => "bot_keyword",
