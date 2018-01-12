@@ -32,7 +32,7 @@ use Google\Cloud\Speech\SpeechClient;
 			include('event/follow_event/bot_follow_event.php');
 		}
 		
-		//follow event 
+		//Unfollow event 
         if ($event instanceof \LINE\LINEBot\Event\UnfollowEvent) { 
 			include('event/follow_event/bot_unfollow_event.php');		
 		}
@@ -45,10 +45,15 @@ use Google\Cloud\Speech\SpeechClient;
  
 		//text event 
         if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) {
-			$getText = $event->getText();
-
-			$user_status=$redis->checkStatus($user_id); //user status
-
+			
+			if($redis->checkLocation($user_id)==0){ // location add
+				$UtilityHandler= new App\event\UtilityHandler;				//create UtilityHandler object
+				$bot->replyMessage($reply_token, $UtilityHandler->askAddLocation());
+			}
+	
+			 $getText = $event->getText();
+  	    	 $user_status=$redis->checkStatus($user_id); //user status
+ 
 			switch ($user_status) {
 				case 'map_key':
 				$getText = '關鍵字：'.$getText;
@@ -80,7 +85,7 @@ use Google\Cloud\Speech\SpeechClient;
 				include('event/message_event/bot_imagemap.php');  
 			   }
 			} 
-			
+
         }
 
 		//location event 		
