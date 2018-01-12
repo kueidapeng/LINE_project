@@ -25,12 +25,9 @@
 					$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/categories_a/".$category_id."/brands/distinct?latlng=".$latlng."&zip_code=".$zip_code."&_offset=0"))->result->cat003->brands;
 
 					if(empty($contents)){
-						
 						$text = emoji('100095')."很抱歉，您的所在地找不到".$Text."的相關優惠。";
 						$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($text);  
- 
 						$MultiMessageBuilder->add($textMessageBuilder);
-						
 					}else{
 					
 					$columns = array();
@@ -51,29 +48,23 @@
 								new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder(emoji('1F449')." 優惠連結",$web_url),
 								new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder(emoji('1F695')." 地圖導航",$map_url),
 								new \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder(emoji('1F46B')." 推薦優惠","line://msg/text/?".urlencode($share))
-								 
 							  );
 		    
 						//$imagemap='https://maps.googleapis.com/maps/api/staticmap?center='.$content->branch->lat.','.$content->branch->lng.'&zoom=18&sensor=false&scale=1&size=600x300&maptype=roadmap&format=png&markers=size:mid%7Ccolor:0xf896b4%7Clabel:%7C'.$content->branch->lat.','.$content->branch->lng;
 						$title	=mb_strimwidth($content->activity->title, 0, 58, "..."); // max text 120 
 						$column = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder(emoji('1F4B3')." ".$content->activity->name." ➤ ".$content->branch->name,$title, $content->logo_img_url, $actions);
-						$columns[] = $column;
-				
-						
+						$columns[] = $column;		
 					}
-					
-			
 				
 					$carousel = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder($columns);
 					$msg = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder(emoji('1F50D')."這訊息要在手機上才能看唷", $carousel);
 					$MultiMessageBuilder->add($msg);
-
 					}
  
 					
 					$actions = array(
 						new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("繼續搜尋", "map_cat=Y"),
-						new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder("回卡好用服務", "map_cat=N")
+						new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder(" ", " ")
 					  );
 					$button = new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder(emoji('1F4CC')." 是否要在搜尋其他優惠？", $actions);
 					$msg2 = new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder(emoji('1F50D')."這訊息要在手機上才能看唷", $button);
