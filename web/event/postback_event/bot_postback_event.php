@@ -17,7 +17,7 @@ use LINE\LINEBot\MessageBuilder\TextMessageBuilder as TextMessageBuilder;
 					switch ($page) {
 						case 'Y':
 						$bot->pushMessage($user_id, new TextMessageBuilder($jsonString['bot_postback_event_continue_search'])); //message push
-						include('event/message_event/bot_map_search.php');
+						include('event/message_event/bot_map_search_key.php');
 						break;
 						case 'N':
 						$bot->pushMessage($user_id, new TextMessageBuilder($jsonString['bot_postback_event_cardhoin_service'])); //message push
