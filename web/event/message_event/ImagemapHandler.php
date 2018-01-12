@@ -8,28 +8,39 @@ use LINE\LINEBot\MessageBuilder\ImagemapMessageBuilder;
 class ImagemapHandler {
 
 	public function createImagemap() {
-        $columns = array();
-        $baseUrl='https://'. $_SERVER['HTTP_HOST'].getenv('image_path').'line_menu.png?_ignore=';
-        $altText="卡好用LINE服務";
-        
-        $baseSizeBuilder = new BaseSizeBuilder(1040,1040);
-        $areaBuilderLT = new AreaBuilder(17,215,500,400); 	//LT block
-        $areaBuilderRT = new AreaBuilder(523,210,500,400);	//RT block
-        $areaBuilderLD = new AreaBuilder(17,623,500,400);	//LD block
-        $areaBuilderRD = new AreaBuilder(523,623,500,400);	//RD block
+     $baseUrl='https://'. $_SERVER['HTTP_HOST'].getenv('image_path').'cat_menu_hand.png?_ignore=';
+ 
+	$altText="卡好用類別";
+ 
+	$baseSizeBuilder = new BaseSizeBuilder(750,1040);
+	$areaBuilderKeyword = new AreaBuilder(17,46,944,113); 	//LT block
+	$areaBuilderCat1 = new AreaBuilder(84,211,174,174);	//RT block
+	$areaBuilderCat2 = new AreaBuilder(319,211,174,174);	//LD block
+	$areaBuilderCat3 = new AreaBuilder(551,211,174,174);	//RD block
+	$areaBuilderCat4 = new AreaBuilder(786,211,174,174);	//RD block
+	$areaBuilderCat5 = new AreaBuilder(84,467,174,174);	//RD block
+	$areaBuilderCat6 = new AreaBuilder(319,467,174,174);	//RD block
+	$areaBuilderCat7 = new AreaBuilder(551,467,174,174);	//RD block
+			
+	$linkUri1="關鍵字搜尋";
+	$Cat1="類別：美味食光";
+	$Cat2="類別：購物優惠";
+	$Cat3="類別：影藝娛樂";
+	$Cat4="類別：旅遊住宿";
+	$Cat5="類別：加油租車";
+	$Cat6="類別：交通運輸";
+	$Cat7="類別：網購訂票";
+ 
+	$columns[] = new ImagemapMessageActionBuilder($linkUri1,$areaBuilderKeyword);
+	$columns[] = new ImagemapMessageActionBuilder($Cat1,$areaBuilderCat1);
+	$columns[] = new ImagemapMessageActionBuilder($Cat2,$areaBuilderCat2);
+	$columns[] = new ImagemapMessageActionBuilder($Cat3,$areaBuilderCat3);
+	$columns[] = new ImagemapMessageActionBuilder($Cat4,$areaBuilderCat4);
+	$columns[] = new ImagemapMessageActionBuilder($Cat5,$areaBuilderCat5);
+	$columns[] = new ImagemapMessageActionBuilder($Cat6,$areaBuilderCat6);
+	$columns[] = new ImagemapMessageActionBuilder($Cat7,$areaBuilderCat7);
 
-        $linkUri1="優惠搜尋";
-        $linkUri4="https://www.cardhoin.com/category/today?offset=10";
-        $linkUri2="https://www.cardhoin.com/category/hot?offset=10";
-        $linkUri3="https://www.cardhoin.com/category/new?offset=10";
-        $linkUri4="https://www.cardhoin.com/category/today?offset=10";
-      
-        $columns[] = new ImagemapMessageActionBuilder($linkUri1,$areaBuilderLT);
-        $columns[] = new ImagemapUriActionBuilder($linkUri2,$areaBuilderRT);
-        $columns[] = new ImagemapUriActionBuilder($linkUri3,$areaBuilderLD);
-        $columns[] = new ImagemapUriActionBuilder($linkUri4,$areaBuilderRD);
-
-        $ImageMessageBuilder = new ImagemapMessageBuilder($baseUrl,$altText,$baseSizeBuilder,$columns);  
+        $ImageMessageBuilder = new ImagemapMessageBuilder($baseUrl,$altText,$baseSizeBuilder,$columns); 
 	 	return $ImageMessageBuilder;
 	 }
    
