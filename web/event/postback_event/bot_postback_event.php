@@ -21,7 +21,8 @@ use LINE\LINEBot\MessageBuilder\TextMessageBuilder as TextMessageBuilder;
 						break;
 						case 'N':
 						$bot->pushMessage($user_id, new TextMessageBuilder($jsonString['bot_postback_event_cardhoin_service'])); //message push
-						include('event/message_event/bot_imagemap.php');
+						// include('event/message_event/bot_imagemap.php');
+						include('event/message_event/bot_map_search.php');
 						break;				
 					}
 
