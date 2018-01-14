@@ -69,6 +69,7 @@ use Google\Cloud\Speech\SpeechClient;
 				"您好" => "bot_greeting",
 				"欸" => "bot_ask",
 				"ㄟ" => "bot_ask",
+				"使用教學"=>"bot_instruction",
 				"資訊查詢"=>"bot_information_event",
 				"關鍵字搜尋" => "bot_map_search_key",
 				"卡好用APP下載" => "bot_app_download",
