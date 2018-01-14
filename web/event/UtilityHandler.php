@@ -3,8 +3,6 @@ namespace App\event;
 use LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
-use LINE\LINEBot\MessageBuilder\MultiMessageBuilder;
-use LINE\LINEBot\MessageBuilder\TextMessageBuilde;
 
 class UtilityHandler {
 
