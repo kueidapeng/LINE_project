@@ -17,7 +17,7 @@
 			$MultiMessageBuilder = new LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
 			
 					$latlng=$redis->getLocation($user_id);
-					$address = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?latlng=".$latlng."&region=taiwan&language=zh-TW"),true);
+					$address = json_decode(file_get_contents("https://maps.googleapis.com/maps/api/geocode/json?latlng=".$latlng."&language=zh-TW&key=".getenv('google_map_key')),true);
 			
 			
 					for($i=0;$i<count($address['results'][0]['address_components']);$i++){
