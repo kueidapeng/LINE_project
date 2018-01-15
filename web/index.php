@@ -71,6 +71,7 @@ use Google\Cloud\Speech\SpeechClient;
 				"ㄟ" => "bot_ask",
 				"使用教學"=>"bot_instruction",
 				"資訊查詢"=>"bot_information_event",
+				"類別搜尋" => "bot_imagemap",
 				"關鍵字搜尋" => "bot_map_search_key",
 				"卡好用APP下載" => "bot_app_download",
 				preg_match ("/\類別：/i", $getText) == 1 ? $getText : "" => "bot_category",
