@@ -4,9 +4,9 @@
     use  LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
 
     $MultiMessageBuilder = new MultiMessageBuilder();
-    $baseUrl='https://'. $_SERVER['HTTP_HOST'].getenv('image_path').'menu_instruction.png?_ignore=';	
+    $baseUrl='https://'. $_SERVER['HTTP_HOST'].getenv('image_path').'menu_instructionV1.png?_ignore=';	
 
-    $MultiMessageBuilder->add(new TextMessageBuilder(emoji('2728').' 若您欲輸入關鍵字查詢店家，請點擊圖片中「關鍵字查詢」欄位進行查詢；若想快速查詢可點擊下方的「分類圖示」進行查詢。'.emoji('1f381')));
+    $MultiMessageBuilder->add(new TextMessageBuilder(emoji('2728').' 若您欲輸入關鍵字查詢店家，請點擊圖片中「關鍵字查詢」欄位進行查詢。'."\r\n".emoji('1f38a').' 若想快速查詢可點擊下方的「分類圖示」進行查詢。'.emoji('1f381')));
     $MultiMessageBuilder->add(new ImageMessageBuilder($baseUrl,$baseUrl));
     
 	$bot->replyMessage($reply_token, $MultiMessageBuilder);
