@@ -12,28 +12,25 @@
     $instagram_url='https://www.instagram.com/cardhoin.app/';
     $facebook_url='https://www.facebook.com/cardhoin/';
     //tutor
-    $baseUrl='https://'. $_SERVER['HTTP_HOST'].getenv('image_path').'guide.png?_ignore=';	
-    $actions = array( new MessageTemplateActionBuilder(emoji('1F449')." 使用教學","使用教學") );
+    $baseUrl='https://'. $_SERVER['HTTP_HOST'].getenv('image_path').'guideV1.png?_ignore=';	
+    $actions = array( new MessageTemplateActionBuilder(emoji('1F449')." 使用教學","使用教學"), 
+                      new MessageTemplateActionBuilder(" "," ") );
     $column = new CarouselColumnTemplateBuilder('使用教學','卡好用Chat Bot使用步驟教學',$baseUrl, $actions);
     $columns[] = $column;	
     //policy
-    $baseUrl='https://'. $_SERVER['HTTP_HOST'].getenv('image_path').'certificate_new.png?_ignore=';			
-    $actions = array( new UriTemplateActionBuilder(emoji('1F449')." 服務條款連結",$policy_url) );
+    $baseUrl='https://'. $_SERVER['HTTP_HOST'].getenv('image_path').'certificateV1.png?_ignore=';			
+    $actions = array( new UriTemplateActionBuilder(emoji('1F449')." 服務條款連結",$policy_url), 
+                      new MessageTemplateActionBuilder(" "," ") );
     $column = new CarouselColumnTemplateBuilder('服務條款','卡好用為宏碁資訊服務股份有限公司所研發...',$baseUrl, $actions);
     $columns[] = $column;	
-    //instagram
-    $baseUrl='https://'. $_SERVER['HTTP_HOST'].getenv('image_path').'instagram_logo.png?_ignore=';			
-    $actions = array( new UriTemplateActionBuilder(emoji('1F449')." instagram連結",$instagram_url) );
-    $column = new CarouselColumnTemplateBuilder('instagram','卡好用 instagram',$baseUrl, $actions);
-    $columns[] = $column;	
-    //facebook
-    $baseUrl='https://'. $_SERVER['HTTP_HOST'].getenv('image_path').'facebook.png?_ignore=';			
-    $actions = array( new UriTemplateActionBuilder(emoji('1F449')." facebook連結",$facebook_url) );
-    $column = new CarouselColumnTemplateBuilder('facebook','卡好用 facebook',$baseUrl, $actions);
+    //facebook+instagram
+    $baseUrl='https://'. $_SERVER['HTTP_HOST'].getenv('image_path').'informationV1.png?_ignore=';			
+    $actions = array(new UriTemplateActionBuilder(emoji('1F449')." facebook連結",$facebook_url),
+                     new UriTemplateActionBuilder(emoji('1F449')." instagram連結",$instagram_url));
+    $column = new CarouselColumnTemplateBuilder('卡好用相關連結','卡好用相關資訊連結',$baseUrl, $actions);
     $columns[] = $column;
 
     $carousel = new CarouselTemplateBuilder($columns);
-	$msg = new TemplateMessageBuilder(emoji('1F50D')."這訊息要在手機上才能看唷", $carousel);
-	$MultiMessageBuilder->add($msg);
-    $bot->replyMessage($reply_token,$MultiMessageBuilder);	
+	$TemplateMessageBuilder = new TemplateMessageBuilder(emoji('1F50D')."這訊息要在手機上才能看唷", $carousel);
+    $bot->replyMessage($reply_token,$TemplateMessageBuilder);	
 ?>
