@@ -4,7 +4,7 @@
 		$redis->updateUserStatus($user_id,'');
 		$Text=str_replace("類別：", '', $getText);
 
-		$category = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/categories?page_type=menu"),true);
+		$category = json_decode(file_get_contents("http://dev-cardhoin.xyzcamp.info/apiserver/deviceapi/v1/categories?page_type=menu"),true);
 		
 		$category_id='';
 		for($i=0;$i<count($category['result']['cat001']['categories']);$i++){
@@ -22,7 +22,7 @@
 					 $bot->replyMessage($reply_token, $textMessageBuilder);*/
 					//$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/categories/today_usable/brands?latlng=".$event->getLatitude().",".$event->getLongitude()."&zip_code=".$zip_code."&_offset=0"))->result->cat00456->brands;
 
-					$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/categories_a/".$category_id."/brands/distinct?latlng=".$latlng."&zip_code=".$zip_code."&_offset=0"))->result->cat003->brands;
+					$contents = json_decode(file_get_contents("http://dev-cardhoin.xyzcamp.info/apiserver/deviceapi/v1/categories_a/".$category_id."/brands/distinct?latlng=".$latlng."&zip_code=".$zip_code."&_offset=0"))->result->cat003->brands;
 
 					if(empty($contents)){
 						$text = emoji('100095')."很抱歉，您的所在地找不到".$Text."的相關優惠。";

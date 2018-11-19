@@ -15,7 +15,7 @@
 					 $bot->replyMessage($reply_token, $textMessageBuilder);*/
 					//$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/categories/today_usable/brands?latlng=".$event->getLatitude().",".$event->getLongitude()."&zip_code=".$zip_code."&_offset=0"))->result->cat00456->brands;
 
-					$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/branches/search_t2?latlng=".$latlng."&zip_code=".$zip_code."&keyword=".urlencode($Text)))->result->act006->branches;
+					$contents = json_decode(file_get_contents("http://dev-cardhoin.xyzcamp.info/apiserver/deviceapi/v1/branches/search_t2?latlng=".$latlng."&zip_code=".$zip_code."&keyword=".urlencode($Text)))->result->act006->branches;
 					
 					if(empty($contents)){
 						$text = emoji('100095')."很抱歉，找不到您要的優惠。";

@@ -27,7 +27,7 @@
 						}
 					} 
 					sleep(1);
-					$contents = json_decode(file_get_contents("https://www.cardhoin.com/apiserver/deviceapi/v1/geoes/live?zip_code=".$zip_code))->result->geo003->geo;
+					$contents = json_decode(file_get_contents("http://dev-cardhoin.xyzcamp.info/apiserver/deviceapi/v1/geoes/live?zip_code=".$zip_code))->result->geo003->geo;
 					
 					$area_level_1=$contents->parent->value;
 					$area_level_2=$contents->value;

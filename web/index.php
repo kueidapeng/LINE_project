@@ -1,8 +1,9 @@
-<?php 
+﻿<?php 
 require_once '../vendor/autoload.php';
 use Google\Cloud\Speech\SpeechClient;
  
  
+
  	if (file_exists(__DIR__.'/.env')){
 		$dotenv = new Dotenv\Dotenv(__DIR__);	
 		$dotenv->load();
